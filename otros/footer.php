@@ -60,7 +60,7 @@
                           </a>
                       </li>
                       <li class="mb-2">
-                          <i class="fas fa-map-marker-alt me-2"></i> <?php echo $usuario['nombreEmpresa']; ?>, Perú
+                          <i class="fas fa-map-marker-alt me-2"></i> <?php echo $usuario['direccion']; ?>, Perú
                       </li>
                   </ul>
               </div>
@@ -146,4 +146,5 @@
           </div>
       </div>
   </div>
+
   </div>
