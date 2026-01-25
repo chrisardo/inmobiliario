@@ -1,0 +1,94 @@
+/* ===== LAYOUT GENERAL ===== */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+/* ===== SIDEBAR BASE ===== */
+#sidebar {
+  width: 250px;
+  min-height: 100vh;
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+  #sidebar {
+    display: block;
+  }
+}
+
+/* ===== MÓVIL ===== */
+@media (max-width: 767.98px) {
+  #sidebar {
+    display: none;
+  }
+
+  #sidebar.show {
+    display: block;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 991.98px) {
+  #sidebar {
+    margin-left: -250px; /* oculto por defecto */
+  }
+
+  #sidebar.show {
+    margin-left: 0;
+  }
+}
+
+/*Ajustar pantalla*/
+/* ===== CONTENIDO PRINCIPAL ===== */
+#content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Navbar superior */
+#content .navbar {
+  flex-shrink: 0;
+}
+
+/* Área de contenido scrolleable */
+#content .container-fluid {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/*icono buscar*/
+.icono-buscar {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #6c757d; 
+  pointer-events: none;
+}
+
+/*********************************/
+/* ===== KPI CARDS HOVER ===== */
+.kpi-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.kpi-card:hover {
+  transform: scale(1.05); /* 🔍 aumenta tamaño */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+.kpi-card:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+@media (max-width: 768px) {
+  .kpi-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
