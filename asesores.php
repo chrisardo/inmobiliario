@@ -134,7 +134,7 @@ $totalAsesores = $fila0['total'];
             <div class="row align-items-center">
                 <!-- Título a la izquierda -->
                 <div class="col-12 col-md-6">
-                    <h1 class="h4 fw-bold mb-0">Propiedades</h1>
+                    <h1 class="h4 fw-bold mb-0">Asesores</h1>
                 </div>
                 <!-- Breadcrumb a la derecha -->
                 <div class="col-12 col-md-6">
@@ -148,7 +148,7 @@ $totalAsesores = $fila0['total'];
                             <li
                                 class="breadcrumb-item active text-white"
                                 aria-current="page">
-                                PROPIEDADES
+                                ASESORES
                             </li>
                         </ol>
                     </nav>
@@ -278,5 +278,6 @@ ${mensaje}
     <!--llamar a js/script.js-->
     <script src="js/script.js"></script>
 </body>
+
 
 </html>
