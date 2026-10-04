@@ -1,0 +1,381 @@
+/* =====================================================
+           FORMULARIO TESTIMONIO
+        ===================================================== */
+
+.page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 25px;
+}
+
+.page-eyebrow {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #10b981;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 25px;
+
+  font-weight: 750;
+}
+
+.page-header p {
+  margin: 7px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.form-panel {
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  background: #fff;
+
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+
+  overflow: hidden;
+}
+
+.form-panel-header {
+  padding: 22px 25px 18px;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.form-panel-header h2 {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.form-panel-header p {
+  margin: 5px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+}
+
+.form-panel-body {
+  padding: 25px;
+}
+
+.form-label {
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.form-control {
+  min-height: 43px;
+
+  border-color: #e2e8f0;
+
+  border-radius: 9px;
+
+  color: #334155;
+
+  font-size: 12px;
+}
+
+.form-control:focus {
+  border-color: #10b981;
+
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+textarea.form-control {
+  min-height: 145px;
+
+  resize: vertical;
+}
+
+.form-text {
+  color: #94a3b8;
+
+  font-size: 9px;
+}
+
+.required {
+  color: #ef4444;
+}
+
+/* =====================================================
+           IMAGEN
+        ===================================================== */
+
+.image-upload-box {
+  min-height: 250px;
+
+  padding: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  border: 2px dashed #dbe3ea;
+
+  border-radius: 13px;
+
+  background: #f8fafc;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.image-upload-box:hover {
+  border-color: #10b981;
+
+  background: #f0fdf9;
+}
+
+.image-upload-box.has-image {
+  border-style: solid;
+
+  border-color: #10b981;
+
+  background: #fff;
+}
+
+.image-upload-icon {
+  width: 50px;
+  height: 50px;
+
+  margin-bottom: 10px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ecfdf5;
+
+  color: #10b981;
+
+  font-size: 18px;
+}
+
+.image-upload-box strong {
+  color: #475569;
+
+  font-size: 11px;
+}
+
+.image-upload-box span {
+  margin-top: 4px;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+
+  text-align: center;
+}
+
+#imagenPreview {
+  display: none;
+
+  width: 100%;
+
+  max-height: 220px;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+}
+
+.btn-remove-image {
+  display: none;
+
+  margin-top: 10px;
+}
+
+/* =====================================================
+           VIDEO
+        ===================================================== */
+
+.video-input-wrapper {
+  position: relative;
+}
+
+.video-input-wrapper i {
+  position: absolute;
+
+  left: 13px;
+  top: 14px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  pointer-events: none;
+}
+
+.video-input-wrapper input {
+  padding-left: 37px;
+}
+
+/* =====================================================
+           BOTONES
+        ===================================================== */
+
+.form-actions {
+  padding: 18px 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  border-top: 1px solid #f1f5f9;
+
+  background: #fafbfc;
+}
+
+.btn-admin {
+  min-height: 40px;
+
+  padding: 8px 17px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+
+  font-weight: 650;
+}
+
+.btn-cancel {
+  border: 1px solid #e2e8f0;
+
+  background: #fff;
+
+  color: #64748b;
+}
+
+.btn-cancel:hover {
+  background: #f8fafc;
+
+  color: #334155;
+}
+
+.btn-save {
+  border: 0;
+
+  background: #10b981;
+
+  color: #fff;
+}
+
+.btn-save:hover {
+  background: #059669;
+
+  color: #fff;
+}
+
+.btn-save:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+/* =====================================================
+           INFORMACIÓN
+        ===================================================== */
+
+.info-box {
+  margin-top: 20px;
+
+  padding: 14px 16px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  border: 1px solid #dbeafe;
+
+  border-radius: 11px;
+
+  background: #eff6ff;
+}
+
+.info-box i {
+  margin-top: 2px;
+
+  color: #3b82f6;
+
+  font-size: 13px;
+}
+
+.info-box span {
+  color: #475569;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+}
+
+/* =====================================================
+           MOBILE
+        ===================================================== */
+
+@media (max-width: 767.98px) {
+  .form-panel-body {
+    padding: 18px;
+  }
+
+  .form-actions {
+    padding: 15px 18px;
+
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+  .btn-admin {
+    width: 100%;
+  }
+
+  .page-header h1 {
+    font-size: 21px;
+  }
+}

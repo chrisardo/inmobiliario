@@ -1,0 +1,1218 @@
+/* ============================================================
+   CoDevPro Technology
+   Archivo: css/adm_registro_asesor.css
+   Módulo: Registro de asesores
+============================================================ */
+
+
+/* ============================================================
+   VARIABLES
+============================================================ */
+
+:root {
+
+    --form-primary: #10b981;
+    --form-primary-dark: #059669;
+
+    --form-blue: #3b82f6;
+    --form-purple: #8b5cf6;
+
+    --form-bg: #f5f7fb;
+
+    --form-white: #ffffff;
+
+    --form-text: #1e293b;
+    --form-muted: #64748b;
+    --form-light: #94a3b8;
+
+    --form-border: #e5e7eb;
+
+    --form-radius: 16px;
+
+    --form-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.055);
+
+    --form-shadow-hover:
+        0 15px 35px rgba(15, 23, 42, 0.09);
+}
+
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+
+.page-header {
+
+    margin-bottom: 25px;
+
+    padding: 26px 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border: 1px solid var(--form-border);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f8fafc 100%
+        );
+
+    box-shadow: var(--form-shadow);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.page-header::after {
+
+    content: "";
+
+    width: 180px;
+    height: 180px;
+
+    position: absolute;
+
+    right: -80px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(16, 185, 129, 0.08);
+}
+
+
+.page-header > div:first-child {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.page-eyebrow {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--form-primary);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.page-header h1 {
+
+    margin: 0 0 6px;
+
+    color: #0f172a;
+
+    font-size: 25px;
+
+    font-weight: 750;
+
+    letter-spacing: -0.5px;
+}
+
+
+.page-header p {
+
+    margin: 0;
+
+    color: var(--form-muted);
+
+    font-size: 12px;
+}
+
+
+.page-header-icon {
+
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #ecfdf5;
+
+    color: var(--form-primary);
+
+    font-size: 21px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* ============================================================
+   ALERTAS
+============================================================ */
+
+.form-alert {
+
+    margin-bottom: 20px;
+
+    padding: 13px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    font-size: 11px;
+
+    box-shadow: var(--form-shadow);
+}
+
+
+.form-alert-icon {
+
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    font-size: 13px;
+}
+
+
+.form-alert .btn-close {
+
+    margin-left: auto;
+
+    font-size: 8px;
+}
+
+
+/* ============================================================
+   FORM LAYOUT
+============================================================ */
+
+.form-layout {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   FORM CARD
+============================================================ */
+
+.form-card {
+
+    margin-bottom: 18px;
+
+    border: 1px solid var(--form-border);
+
+    border-radius: var(--form-radius);
+
+    background: var(--form-white);
+
+    box-shadow: var(--form-shadow);
+
+    overflow: hidden;
+
+    transition:
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.form-card:hover {
+
+    box-shadow: var(--form-shadow-hover);
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   FORM CARD HEADER
+============================================================ */
+
+.form-card-header {
+
+    min-height: 76px;
+
+    padding: 16px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    position: relative;
+}
+
+
+.form-section-icon {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    font-size: 14px;
+}
+
+
+.form-section-icon.green {
+
+    color: var(--form-primary);
+
+    background: #ecfdf5;
+}
+
+
+.form-section-icon.blue {
+
+    color: var(--form-blue);
+
+    background: #eff6ff;
+}
+
+
+.form-section-icon.purple {
+
+    color: var(--form-purple);
+
+    background: #f5f3ff;
+}
+
+
+.form-card-header h2 {
+
+    margin: 0 0 3px;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.form-card-header p {
+
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+.optional-badge {
+
+    margin-left: auto;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #f8fafc;
+
+    color: #94a3b8;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+}
+
+
+/* ============================================================
+   FORM CARD BODY
+============================================================ */
+
+.form-card-body {
+
+    padding: 24px;
+}
+
+
+/* ============================================================
+   LABELS
+============================================================ */
+
+.modern-label {
+
+    margin-bottom: 8px;
+
+    display: block;
+
+    color: #334155;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.modern-label span {
+
+    margin-left: 2px;
+
+    color: #ef4444;
+}
+
+
+/* ============================================================
+   INPUT GROUP
+============================================================ */
+
+.modern-input-group {
+
+    display: flex;
+
+    align-items: stretch;
+
+    border: 1px solid #dfe5ec;
+
+    border-radius: 10px;
+
+    background: white;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.modern-input-group:focus-within {
+
+    border-color: rgba(16, 185, 129, 0.55);
+
+    box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.08);
+}
+
+
+.modern-input-icon {
+
+    width: 44px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #94a3b8;
+
+    background: #f8fafc;
+
+    border-right: 1px solid #edf0f4;
+
+    font-size: 12px;
+
+    transition: color 0.2s ease;
+}
+
+
+.modern-input-group:focus-within
+.modern-input-icon {
+
+    color: var(--form-primary);
+
+    background: #f0fdf9;
+}
+
+
+.modern-input {
+
+    min-height: 43px;
+
+    padding: 9px 12px;
+
+    border: 0 !important;
+
+    outline: 0 !important;
+
+    box-shadow: none !important;
+
+    color: #334155;
+
+    font-size: 11px;
+}
+
+
+.modern-input::placeholder {
+
+    color: #b6c0cc;
+}
+
+
+.modern-input:focus {
+
+    color: #1e293b;
+}
+
+
+.modern-input.is-invalid {
+
+    background-image: none !important;
+}
+
+
+.input-helper {
+
+    margin-top: 6px;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+
+.invalid-feedback {
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   UPLOAD
+============================================================ */
+
+.upload-area {
+
+    position: relative;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 13px;
+
+    background: #fafbfc;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.upload-area:hover {
+
+    border-color: rgba(16, 185, 129, 0.55);
+
+    background: #f8fffc;
+}
+
+
+.upload-area.dragover {
+
+    border-color: var(--form-primary);
+
+    background: #ecfdf5;
+}
+
+
+.upload-input {
+
+    width: 1px;
+    height: 1px;
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.upload-label {
+
+    min-height: 105px;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    cursor: pointer;
+}
+
+
+.upload-icon {
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #f5f3ff;
+
+    color: var(--form-purple);
+
+    font-size: 17px;
+}
+
+
+.upload-content {
+
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.upload-content strong {
+
+    color: #334155;
+
+    font-size: 11px;
+}
+
+
+.upload-content span {
+
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+
+.upload-button {
+
+    flex-shrink: 0;
+
+    padding: 8px 12px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #475569;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.upload-area:hover .upload-button {
+
+    color: var(--form-primary);
+
+    border-color: rgba(16, 185, 129, 0.3);
+
+    background: #f0fdf9;
+}
+
+
+/* ============================================================
+   IMAGE PREVIEW
+============================================================ */
+
+.image-preview {
+
+    margin-top: 13px;
+
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    border: 1px solid #dbe5df;
+
+    border-radius: 12px;
+
+    background: #f8fffc;
+}
+
+
+.preview-image-wrapper {
+
+    width: 70px;
+    height: 70px;
+
+    flex-shrink: 0;
+
+    padding: 3px;
+
+    border: 1px solid #dce9e1;
+
+    border-radius: 10px;
+
+    background: white;
+
+    overflow: hidden;
+}
+
+
+.preview-image-wrapper img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 7px;
+}
+
+
+.preview-information {
+
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.preview-information strong {
+
+    color: #334155;
+
+    font-size: 10px;
+}
+
+
+.preview-details {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+
+.preview-details span {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.preview-details i {
+
+    color: var(--form-primary);
+}
+
+
+.preview-remove {
+
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: #fef2f2;
+
+    color: #ef4444;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.preview-remove:hover {
+
+    background: #fee2e2;
+
+    transform: scale(1.05);
+}
+
+
+/* ============================================================
+   ACTIONS
+============================================================ */
+
+.form-actions {
+
+    padding: 4px 0 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+
+.btn-primary-modern,
+.btn-secondary-modern {
+
+    min-height: 43px;
+
+    padding: 10px 17px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 10px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.btn-primary-modern {
+
+    border: 1px solid var(--form-primary);
+
+    background: var(--form-primary);
+
+    color: white;
+
+    box-shadow:
+        0 5px 14px rgba(16, 185, 129, 0.18);
+}
+
+
+.btn-primary-modern:hover {
+
+    border-color: var(--form-primary-dark);
+
+    background: var(--form-primary-dark);
+
+    color: white;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px rgba(16, 185, 129, 0.24);
+}
+
+
+.btn-primary-modern:active {
+
+    transform: translateY(0);
+}
+
+
+.btn-secondary-modern {
+
+    border: 1px solid #dbe2ea;
+
+    background: white;
+
+    color: #64748b;
+}
+
+
+.btn-secondary-modern:hover {
+
+    border-color: #cbd5e1;
+
+    background: #f8fafc;
+
+    color: #334155;
+}
+
+
+.button-loading {
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.dashboard-footer {
+
+    max-width: 1050px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ============================================================
+   FOCUS ACCESSIBILITY
+============================================================ */
+
+button:focus-visible,
+a:focus-visible,
+label:focus-visible {
+
+    outline: 3px solid rgba(16, 185, 129, 0.25);
+
+    outline-offset: 2px;
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 991.98px) {
+
+    .page-header {
+
+        padding: 23px;
+
+    }
+
+    .form-layout {
+
+        max-width: none;
+
+    }
+
+}
+
+
+/* ============================================================
+   MÓVIL
+============================================================ */
+
+@media (max-width: 767.98px) {
+
+    .page-header {
+
+        padding: 20px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .page-header h1 {
+
+        font-size: 21px;
+
+    }
+
+
+    .page-header p {
+
+        font-size: 10px;
+
+        line-height: 1.5;
+
+    }
+
+
+    .page-header-icon {
+
+        width: 48px;
+        height: 48px;
+
+        font-size: 17px;
+
+    }
+
+
+    .form-card {
+
+        border-radius: 13px;
+
+    }
+
+
+    .form-card-header {
+
+        min-height: 68px;
+
+        padding: 14px 16px;
+
+    }
+
+
+    .form-card-body {
+
+        padding: 18px 16px;
+
+    }
+
+
+    .form-section-icon {
+
+        width: 37px;
+        height: 37px;
+
+        font-size: 12px;
+
+    }
+
+
+    .form-card-header h2 {
+
+        font-size: 12px;
+
+    }
+
+
+    .form-card-header p {
+
+        font-size: 9px;
+
+    }
+
+
+    .optional-badge {
+
+        display: none;
+
+    }
+
+
+    .upload-label {
+
+        min-height: 125px;
+
+        padding: 17px;
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .upload-content {
+
+        padding-top: 4px;
+
+    }
+
+
+    .upload-button {
+
+        width: 100%;
+
+        text-align: center;
+
+    }
+
+
+    .image-preview {
+
+        align-items: flex-start;
+
+    }
+
+
+    .form-actions {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .btn-primary-modern,
+    .btn-secondary-modern {
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* ============================================================
+   MÓVIL PEQUEÑO
+============================================================ */
+
+@media (max-width: 480px) {
+
+    .page-header {
+
+        align-items: flex-start;
+
+    }
+
+
+    .page-header-icon {
+
+        display: none;
+
+    }
+
+
+    .modern-input {
+
+        font-size: 12px;
+
+    }
+
+
+    .upload-label {
+
+        display: grid;
+
+        grid-template-columns: auto 1fr;
+
+        gap: 12px;
+
+    }
+
+
+    .upload-button {
+
+        grid-column: 1 / -1;
+
+    }
+
+
+    .preview-image-wrapper {
+
+        width: 58px;
+        height: 58px;
+
+    }
+
+
+    .preview-details {
+
+        flex-direction: column;
+
+        gap: 4px;
+
+    }
+
+}
+
+
+/* ============================================================
+   REDUCIR ANIMACIONES
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .form-card,
+    .modern-input-group,
+    .upload-area,
+    .btn-primary-modern,
+    .btn-secondary-modern,
+    .preview-remove {
+
+        transition: none !important;
+
+    }
+
+}

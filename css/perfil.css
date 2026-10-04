@@ -1,3 +1,8 @@
+/* Altura del navbar */
+
+body {
+  padding-top: var(--navbar-height);
+}
 .profile-header {
   color: white;
   padding: 2rem 0;
@@ -92,17 +97,19 @@
   color: #fff;
 }
 .email-text {
-    max-width: 180px;        /* controla el ancho */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    word-break: break-all;
+  max-width: 180px; /* controla el ancho */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  word-break: break-all;
 }
 @media (max-width: 576px) {
-    .email-text {
-        max-width: 140px;
-    }
+  .email-text {
+    max-width: 140px;
+  }
 }
-
-
+.video-perfil {
+  max-height: 220px; /* 👈 ajusta aquí */
+  object-fit: cover; /* mantiene proporción */
+}

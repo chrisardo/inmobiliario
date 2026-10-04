@@ -1,0 +1,2860 @@
+/* ============================================================
+   CoDevPro Technology
+   Archivo: css/adm_lista_asesores.css
+   Módulo: Lista de Asesores
+   Sistema: Inmobiliario
+============================================================ */
+
+/* ============================================================
+   VARIABLES
+============================================================ */
+
+:root {
+  --asesor-primary: #10b981;
+  --asesor-primary-dark: #059669;
+  --asesor-blue: #3b82f6;
+  --asesor-purple: #8b5cf6;
+  --asesor-orange: #f59e0b;
+  --asesor-red: #ef4444;
+
+  --asesor-bg: #f5f7fb;
+  --asesor-white: #ffffff;
+
+  --asesor-text: #0f172a;
+  --asesor-text-secondary: #334155;
+  --asesor-muted: #64748b;
+  --asesor-light: #94a3b8;
+
+  --asesor-border: #e5e7eb;
+
+  --asesor-radius: 16px;
+
+  --asesor-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* ============================================================
+   CONTENIDO PRINCIPAL
+============================================================ */
+
+.asesores-content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 32px;
+  background: var(--asesor-bg);
+}
+
+.asesores-content::-webkit-scrollbar {
+  width: 7px;
+}
+
+.asesores-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.asesores-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+.asesores-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.asesores-content {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+
+.asesores-hero {
+  min-height: 190px;
+  margin-bottom: 28px;
+  padding: 30px 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: linear-gradient(120deg, #0f172a 0%, #172554 100%);
+
+  color: #ffffff;
+
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+}
+
+.asesores-hero::before {
+  content: "";
+
+  width: 280px;
+  height: 280px;
+
+  position: absolute;
+  right: 80px;
+  bottom: -210px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.asesores-hero::after {
+  content: "";
+
+  width: 350px;
+  height: 350px;
+
+  position: absolute;
+  right: -130px;
+  top: -220px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+/* ============================================================
+   HERO CONTENT
+============================================================ */
+
+.asesores-hero-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.asesores-eyebrow {
+  margin-bottom: 9px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #34d399;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1.6px;
+}
+
+.asesores-hero h1 {
+  margin: 0 0 8px;
+
+  color: #ffffff;
+
+  font-size: 27px;
+  font-weight: 750;
+
+  letter-spacing: -0.5px;
+}
+
+.asesores-hero p {
+  max-width: 600px;
+
+  margin: 0;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   HERO ICON
+============================================================ */
+
+.asesores-hero-icon {
+  width: 88px;
+  height: 88px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  z-index: 2;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: #34d399;
+
+  font-size: 34px;
+}
+
+/* ============================================================
+   ALERTAS
+============================================================ */
+
+.asesor-alert {
+  margin-bottom: 24px;
+
+  border: 0;
+  border-radius: 12px;
+
+  font-size: 12px;
+
+  box-shadow: var(--asesor-shadow);
+}
+
+.asesor-alert .btn-close {
+  font-size: 9px;
+}
+
+/* ============================================================
+   SECTION HEADING
+============================================================ */
+
+.asesores-section-heading {
+  margin-bottom: 16px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.asesores-section-heading > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.asesores-section-heading span {
+  color: var(--asesor-light);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+.asesores-section-heading h2 {
+  margin: 0;
+
+  color: var(--asesor-text);
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.asesores-add-btn {
+  min-height: 40px;
+
+  padding: 9px 16px;
+
+  border: 0;
+  border-radius: 10px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.asesores-add-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.24);
+}
+
+/* ============================================================
+   KPI
+============================================================ */
+
+.asesor-kpi {
+  min-height: 155px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid var(--asesor-border);
+  border-radius: var(--asesor-radius);
+
+  background: #ffffff;
+
+  box-shadow: var(--asesor-shadow);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.asesor-kpi:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.1);
+}
+
+.asesor-kpi::after {
+  content: "";
+
+  width: 100px;
+  height: 100px;
+
+  position: absolute;
+
+  right: -45px;
+  bottom: -45px;
+
+  border-radius: 50%;
+
+  opacity: 0.09;
+
+  pointer-events: none;
+}
+
+.kpi-total::after {
+  background: var(--asesor-blue);
+}
+
+.kpi-activos::after {
+  background: var(--asesor-primary);
+}
+
+.kpi-inactivos::after {
+  background: var(--asesor-red);
+}
+
+.kpi-email::after {
+  background: var(--asesor-purple);
+}
+
+/* ============================================================
+   KPI TOP
+============================================================ */
+
+.asesor-kpi-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.asesor-kpi-top > span {
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  background: #f8fafc;
+
+  color: var(--asesor-light);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   KPI ICON
+============================================================ */
+
+.asesor-kpi-icon {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+}
+
+.kpi-total .asesor-kpi-icon {
+  color: var(--asesor-blue);
+  background: #eff6ff;
+}
+
+.kpi-activos .asesor-kpi-icon {
+  color: var(--asesor-primary);
+  background: #ecfdf5;
+}
+
+.kpi-inactivos .asesor-kpi-icon {
+  color: var(--asesor-red);
+  background: #fef2f2;
+}
+
+.kpi-email .asesor-kpi-icon {
+  color: var(--asesor-purple);
+  background: #f5f3ff;
+}
+
+/* ============================================================
+   KPI NUMBER
+============================================================ */
+
+.asesor-kpi-number {
+  margin-top: 17px;
+
+  color: var(--asesor-text);
+
+  font-size: 31px;
+  font-weight: 750;
+
+  line-height: 1;
+}
+
+.asesor-kpi-label {
+  margin-top: 6px;
+
+  color: var(--asesor-muted);
+
+  font-size: 10px;
+}
+
+/* ============================================================
+   TOOLBAR
+============================================================ */
+
+.asesores-toolbar {
+  margin-bottom: 18px;
+
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  border: 1px solid var(--asesor-border);
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow: var(--asesor-shadow);
+}
+
+/* ============================================================
+   SEARCH
+============================================================ */
+
+.asesores-search-wrapper {
+  min-width: 0;
+  flex: 1;
+
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid var(--asesor-border);
+  border-radius: 11px;
+
+  background: #f8fafc;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.asesores-search-wrapper:focus-within {
+  border-color: rgba(16, 185, 129, 0.45);
+
+  background: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.08);
+}
+
+.asesores-search-icon {
+  width: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--asesor-muted);
+
+  font-size: 12px;
+}
+
+.asesores-search-form {
+  min-width: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.asesores-search-form input {
+  width: 100%;
+  height: 100%;
+
+  padding: 0 8px;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: var(--asesor-text);
+
+  font-size: 11px;
+}
+
+.asesores-search-form input::placeholder {
+  color: #94a3b8;
+}
+
+.asesores-search-form input:focus {
+  box-shadow: none;
+}
+
+/* ============================================================
+   SEARCH CLEAR
+============================================================ */
+
+.asesores-search-clear {
+  width: 34px;
+  height: 34px;
+
+  margin-right: 5px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #94a3b8;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.asesores-search-clear:hover {
+  background: #f1f5f9;
+  color: var(--asesor-red);
+}
+
+/* ============================================================
+   TOOLBAR ACTIONS
+============================================================ */
+
+.asesores-toolbar-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+/* ============================================================
+   EXPORT BUTTON
+============================================================ */
+
+.asesores-export-btn {
+  min-height: 42px;
+
+  padding: 8px 14px;
+
+  border: 1px solid var(--asesor-border);
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: var(--asesor-text-secondary);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.asesores-export-btn:hover,
+.asesores-export-btn:focus {
+  border-color: #cbd5e1;
+
+  background: #f8fafc;
+
+  color: var(--asesor-text);
+}
+
+/* ============================================================
+   REGISTER BUTTON
+============================================================ */
+
+.asesores-register-btn {
+  min-height: 42px;
+
+  padding: 8px 15px;
+
+  border: 0;
+  border-radius: 10px;
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+/* ============================================================
+   EXPORT MENU
+============================================================ */
+
+.asesores-export-menu {
+  min-width: 220px;
+
+  padding: 8px;
+
+  border: 1px solid var(--asesor-border);
+  border-radius: 12px;
+
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12);
+}
+
+.asesores-export-menu .dropdown-header {
+  padding: 7px 10px;
+
+  color: var(--asesor-light);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.asesores-export-menu .dropdown-item {
+  padding: 9px 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  border-radius: 8px;
+
+  font-size: 11px;
+
+  transition: background 0.2s ease;
+}
+
+.asesores-export-menu .dropdown-item:hover {
+  background: #f8fafc;
+}
+
+.asesores-export-menu .dropdown-item > span:last-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.asesores-export-menu small {
+  color: var(--asesor-light);
+
+  font-size: 8px;
+}
+
+/* ============================================================
+   EXPORT ICONS
+============================================================ */
+
+.export-icon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+}
+
+.export-icon.pdf {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+.export-icon.excel {
+  color: #16a34a;
+  background: #f0fdf4;
+}
+
+/* ============================================================
+   PANEL
+============================================================ */
+
+.asesores-panel {
+  width: 100%;
+
+  border: 1px solid var(--asesor-border);
+  border-radius: var(--asesor-radius);
+
+  background: #ffffff;
+
+  box-shadow: var(--asesor-shadow);
+
+  overflow: hidden;
+}
+
+/* ============================================================
+   PANEL HEADER
+============================================================ */
+
+.asesores-panel-header {
+  min-height: 76px;
+
+  padding: 18px 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.panel-eyebrow {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--asesor-light);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+}
+
+.asesores-panel-header h2 {
+  margin: 0;
+
+  color: var(--asesor-text);
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   COUNT
+============================================================ */
+
+.asesores-count {
+  min-height: 32px;
+
+  padding: 6px 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 20px;
+
+  background: #ecfdf5;
+
+  color: var(--asesor-primary-dark);
+
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.asesores-count span {
+  color: var(--asesor-muted);
+
+  font-weight: 500;
+}
+
+/* ============================================================
+   TABLE CONTAINER
+============================================================ */
+
+.asesores-panel .table-responsive {
+  width: 100%;
+  margin: 0;
+}
+
+/* ============================================================
+   TABLA
+============================================================ */
+
+.asesores-table {
+  width: 100%;
+
+  margin: 0;
+
+  min-width: 900px;
+
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.asesores-table thead th {
+  height: 47px;
+
+  padding: 0 18px;
+
+  vertical-align: middle;
+
+  border-bottom: 1px solid var(--asesor-border);
+
+  background: #f8fafc;
+
+  color: #64748b;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.asesores-table tbody td {
+  padding: 14px 18px;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  color: var(--asesor-text-secondary);
+
+  font-size: 11px;
+
+  vertical-align: middle;
+}
+
+.asesores-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.asesores-table tbody tr:hover {
+  background: #fbfefd;
+}
+
+.asesores-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.col-actions {
+  width: 100px;
+}
+
+/* ============================================================
+   PERSONA
+============================================================ */
+
+.asesor-person {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  min-width: 180px;
+}
+
+.asesor-avatar {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #ecfdf5;
+  border-radius: 50%;
+
+  background: #f0fdf9;
+
+  color: var(--asesor-primary);
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.asesor-avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.asesor-avatar-placeholder {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+}
+
+.asesor-person-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.asesor-person-info strong {
+  max-width: 210px;
+
+  overflow: hidden;
+
+  color: var(--asesor-text);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.asesor-person-info span {
+  color: var(--asesor-light);
+
+  font-size: 8px;
+}
+
+/* ============================================================
+   CONTACTO
+============================================================ */
+
+.asesor-contact {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  min-width: 160px;
+}
+
+.contact-line {
+  max-width: 220px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--asesor-muted);
+
+  font-size: 9px;
+
+  text-decoration: none;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.contact-line i {
+  width: 14px;
+
+  flex-shrink: 0;
+
+  color: var(--asesor-primary);
+
+  text-align: center;
+
+  font-size: 9px;
+}
+
+.contact-line:hover {
+  color: var(--asesor-primary-dark);
+}
+
+.contact-line.muted {
+  color: #cbd5e1;
+}
+
+.contact-line.muted i {
+  color: #cbd5e1;
+}
+
+/* ============================================================
+   CARGO
+============================================================ */
+
+.asesor-cargo {
+  min-height: 28px;
+
+  max-width: 180px;
+
+  padding: 6px 9px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+
+  color: var(--asesor-text-secondary);
+
+  font-size: 9px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.asesor-cargo i {
+  flex-shrink: 0;
+
+  color: #94a3b8;
+
+  font-size: 8px;
+}
+
+/* ============================================================
+   ESTADO
+============================================================ */
+
+.asesor-status {
+  min-height: 27px;
+
+  padding: 5px 9px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  border-radius: 20px;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+}
+
+.asesor-status.active {
+  color: #047857;
+
+  background: #ecfdf5;
+}
+
+.asesor-status.active .status-dot {
+  background: #10b981;
+}
+
+.asesor-status.inactive {
+  color: #b91c1c;
+
+  background: #fef2f2;
+}
+
+.asesor-status.inactive .status-dot {
+  background: #ef4444;
+}
+
+/* ============================================================
+   FECHA
+============================================================ */
+
+.asesor-date {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--asesor-muted);
+
+  font-size: 9px;
+
+  white-space: nowrap;
+}
+
+.asesor-date i {
+  color: #94a3b8;
+
+  font-size: 10px;
+}
+
+/* ============================================================
+   ACCIONES
+============================================================ */
+
+.asesor-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.asesor-action-btn {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.asesor-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.asesor-action-btn:focus-visible {
+  outline: 0;
+
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
+.asesor-action-btn.edit {
+  color: #d97706;
+  background: #fffbeb;
+}
+
+.asesor-action-btn.edit:hover {
+  color: #b45309;
+  background: #fef3c7;
+}
+
+.asesor-action-btn.delete {
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.asesor-action-btn.delete:hover {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.asesor-action-btn.activate {
+  color: #059669;
+  background: #ecfdf5;
+}
+
+.asesor-action-btn.activate:hover {
+  color: #047857;
+  background: #d1fae5;
+}
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.asesores-empty {
+  min-height: 300px;
+
+  padding: 40px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 65px;
+  height: 65px;
+
+  margin-bottom: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f0fdf9;
+
+  color: #a7f3d0;
+
+  font-size: 24px;
+}
+
+.asesores-empty h3 {
+  margin: 0 0 6px;
+
+  color: var(--asesor-text-secondary);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.asesores-empty p {
+  max-width: 420px;
+
+  margin: 0 0 18px;
+
+  color: var(--asesor-light);
+
+  font-size: 10px;
+
+  line-height: 1.7;
+}
+
+/* ============================================================
+   PAGINACIÓN
+============================================================ */
+
+.asesores-pagination {
+  min-height: 70px;
+
+  padding: 13px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-top: 1px solid #f1f5f9;
+
+  background: #fcfdfd;
+}
+
+.pagination-info {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--asesor-light);
+
+  font-size: 9px;
+}
+
+.pagination-info strong {
+  color: var(--asesor-text-secondary);
+}
+
+.pagination-info .separator {
+  color: #cbd5e1;
+}
+
+.pagination-buttons {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.pagination-btn {
+  min-height: 34px;
+
+  padding: 7px 11px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  border: 1px solid var(--asesor-border);
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: var(--asesor-text-secondary);
+
+  font-size: 9px;
+  font-weight: 650;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pagination-btn:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+
+  background: #ecfdf5;
+
+  color: var(--asesor-primary-dark);
+
+  transform: translateY(-1px);
+}
+
+.pagination-btn.disabled,
+.pagination-btn:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+.pagination-current {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: var(--asesor-primary);
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 750;
+
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.18);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.asesores-footer {
+  margin-top: 24px;
+
+  padding: 18px 3px 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-top: 1px solid var(--asesor-border);
+
+  color: var(--asesor-light);
+
+  font-size: 9px;
+}
+
+/* ============================================================
+   MODAL GENERAL
+============================================================ */
+
+#modalEditar .modal-dialog {
+  max-width: 650px;
+  margin: 1.25rem auto;
+}
+
+#modalEditar .modal-content,
+#modalEliminar .modal-content {
+  border: 0;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.18);
+}
+
+#modalEditar .modal-header,
+#modalEliminar .modal-header {
+  border: 0;
+
+  padding: 13px 17px;
+}
+
+#modalEditar .modal-title,
+#modalEliminar .modal-title {
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+#modalEditar .modal-body,
+#modalEliminar .modal-body {
+  padding: 16px;
+}
+
+#modalEditar .modal-footer,
+#modalEliminar .modal-footer {
+  padding: 11px 16px;
+
+  border-top: 1px solid #f1f5f9;
+}
+
+/* ============================================================
+   MODAL ASESOR - HEADER COMPACTO
+============================================================ */
+
+.modal-asesor-content {
+  width: 100%;
+
+  border: 0;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.18);
+}
+
+.modal-asesor-header {
+  min-height: 62px;
+
+  padding: 11px 16px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: linear-gradient(135deg, #0f172a, #172554);
+
+  color: #ffffff;
+}
+
+.modal-title-wrapper {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.modal-asesor-icon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: #34d399;
+
+  font-size: 13px;
+}
+
+.modal-asesor-eyebrow {
+  display: block;
+
+  margin-bottom: 1px;
+
+  color: #34d399;
+
+  font-size: 7px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+#modalEditar .modal-title {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.modal-asesor-header .btn-close {
+  width: 24px;
+  height: 24px;
+
+  flex-shrink: 0;
+
+  filter: invert(1);
+
+  opacity: 0.75;
+}
+
+.modal-asesor-header .btn-close:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   MODAL BODY COMPACTO
+============================================================ */
+
+#modalEditar .modal-body {
+  padding: 15px 17px 10px;
+}
+
+#modalEditar .modal-body > form {
+  margin: 0;
+}
+
+/* ============================================================
+   MODAL FORM SECTION COMPACTA
+============================================================ */
+
+.modal-form-section {
+  padding: 12px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.modal-form-section:first-of-type {
+  padding-top: 0;
+}
+
+.modal-form-section:last-of-type {
+  border-bottom: 0;
+}
+
+.modal-form-section-title {
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.section-icon {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #ecfdf5;
+
+  color: var(--asesor-primary);
+
+  font-size: 10px;
+}
+
+.modal-form-section-title > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1px;
+}
+
+.modal-form-section-title strong {
+  color: var(--asesor-text-secondary);
+
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.modal-form-section-title small {
+  color: var(--asesor-light);
+
+  font-size: 8px;
+}
+
+/* ============================================================
+   MODAL FORM LABEL
+============================================================ */
+
+#modalEditar .form-label {
+  margin-bottom: 4px;
+
+  color: var(--asesor-text-secondary);
+
+  font-size: 9px;
+  font-weight: 650;
+}
+
+/* ============================================================
+   INPUT GROUP COMPACTO
+============================================================ */
+
+.asesor-input-group {
+  border-radius: 7px;
+
+  overflow: hidden;
+}
+
+.asesor-input-group .input-group-text {
+  min-width: 34px;
+
+  padding: 5px 7px;
+
+  justify-content: center;
+
+  border-color: var(--asesor-border);
+
+  background: #f8fafc;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+}
+
+#modalEditar .form-control {
+  min-height: 34px;
+
+  padding: 6px 9px;
+
+  border-color: var(--asesor-border);
+
+  color: var(--asesor-text);
+
+  font-size: 10px;
+
+  box-shadow: none;
+}
+
+#modalEditar textarea.form-control {
+  min-height: 60px;
+  resize: vertical;
+}
+
+#modalEditar .form-control::placeholder {
+  color: #b0bac8;
+}
+
+#modalEditar .form-control:focus {
+  border-color: rgba(16, 185, 129, 0.5);
+
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.08);
+}
+
+#modalEditar .input-group:focus-within .input-group-text {
+  border-color: rgba(16, 185, 129, 0.5);
+
+  background: #ecfdf5;
+
+  color: var(--asesor-primary);
+}
+
+/* ============================================================
+   ESPACIADO BOOTSTRAP DENTRO DEL MODAL
+============================================================ */
+
+#modalEditar .row {
+  --bs-gutter-x: 12px;
+  --bs-gutter-y: 8px;
+}
+
+#modalEditar .mb-3 {
+  margin-bottom: 8px !important;
+}
+
+#modalEditar .mb-4 {
+  margin-bottom: 10px !important;
+}
+
+/* ============================================================
+   FORM TEXT
+============================================================ */
+
+#modalEditar .form-text {
+  margin-top: 3px;
+
+  color: var(--asesor-light);
+
+  font-size: 7px;
+
+  line-height: 1.4;
+}
+
+/* ============================================================
+   IMAGEN UPLOAD COMPACTA
+============================================================ */
+
+.asesor-image-upload {
+  width: 100%;
+}
+
+.asesor-image-label {
+  min-height: 72px;
+
+  padding: 10px 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.asesor-image-label:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+
+  background: #f0fdf9;
+
+  transform: translateY(-1px);
+}
+
+.asesor-image-upload-icon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #ecfdf5;
+
+  color: var(--asesor-primary);
+
+  font-size: 12px;
+}
+
+.asesor-image-upload-text {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.asesor-image-upload-text strong {
+  color: var(--asesor-text-secondary);
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.asesor-image-upload-text span {
+  color: var(--asesor-muted);
+
+  font-size: 8px;
+}
+
+.asesor-image-upload-text small {
+  color: var(--asesor-light);
+
+  font-size: 7px;
+}
+
+/* ============================================================
+   PREVIEW IMAGEN COMPACTA
+============================================================ */
+
+.asesor-image-preview {
+  margin-top: 7px;
+
+  padding: 7px 9px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  border: 1px solid #d1fae5;
+
+  border-radius: 9px;
+
+  background: #f0fdf9;
+}
+
+.preview-image-wrapper {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border: 2px solid #ffffff;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.07);
+}
+
+.preview-image-wrapper img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.preview-image-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.preview-image-info > strong {
+  color: var(--asesor-text-secondary);
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.preview-data {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 4px 9px;
+}
+
+.preview-data > span {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 3px;
+
+  color: var(--asesor-muted);
+
+  font-size: 7px;
+}
+
+.preview-data i {
+  color: var(--asesor-primary);
+
+  font-size: 7px;
+}
+
+/* ============================================================
+   NOTA EDICIÓN COMPACTA
+============================================================ */
+
+.asesor-edit-note {
+  margin-top: 9px;
+
+  padding: 8px 10px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  border: 1px solid #dbeafe;
+
+  border-radius: 8px;
+
+  background: #eff6ff;
+}
+
+.asesor-edit-note-icon {
+  flex-shrink: 0;
+
+  color: #3b82f6;
+
+  font-size: 10px;
+}
+
+.asesor-edit-note strong {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #1e3a8a;
+
+  font-size: 8px;
+  font-weight: 750;
+}
+
+.asesor-edit-note p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 7px;
+
+  line-height: 1.4;
+}
+
+/* ============================================================
+   MODAL FOOTER COMPACTO
+============================================================ */
+
+.modal-asesor-footer {
+  margin-top: 10px;
+
+  padding: 10px 0 0 !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  border-top: 1px solid #f1f5f9;
+}
+
+/* ============================================================
+   BOTÓN CANCELAR
+============================================================ */
+
+.asesor-btn-cancel {
+  min-height: 34px;
+
+  padding: 6px 12px;
+
+  border: 1px solid var(--asesor-border);
+
+  border-radius: 8px;
+
+  color: var(--asesor-text-secondary);
+
+  font-size: 9px;
+  font-weight: 650;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.asesor-btn-cancel:hover {
+  border-color: #cbd5e1;
+
+  background: #f8fafc;
+
+  color: var(--asesor-text);
+}
+
+/* ============================================================
+   BOTÓN GUARDAR
+============================================================ */
+
+.asesor-btn-save {
+  min-height: 34px;
+
+  padding: 6px 13px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  box-shadow: 0 4px 11px rgba(16, 185, 129, 0.16);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.asesor-btn-save:hover {
+  transform: translateY(-1px);
+
+  box-shadow: 0 6px 14px rgba(16, 185, 129, 0.22);
+}
+
+/* ============================================================
+   ALERTA DENTRO DEL MODAL
+============================================================ */
+
+#alertaAsesor {
+  margin-bottom: 9px;
+
+  padding: 7px 10px;
+
+  border-radius: 8px;
+
+  font-size: 9px;
+}
+
+#alertaAsesor.d-none {
+  display: none !important;
+}
+
+/* ============================================================
+   BACKDROP MODAL
+============================================================ */
+
+.modal-backdrop.show {
+  opacity: 0.65;
+}
+
+/* ============================================================
+   RESPONSIVE - 1199 PX
+============================================================ */
+
+@media (max-width: 1199.98px) {
+  .asesores-content {
+    padding: 28px 24px;
+  }
+
+  .asesores-table {
+    min-width: 850px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE - 992 PX
+============================================================ */
+
+@media (max-width: 991.98px) {
+  .asesores-content {
+    padding: 24px 20px;
+  }
+
+  .asesores-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .asesores-toolbar-actions {
+    justify-content: flex-end;
+  }
+
+  .asesores-hero {
+    min-height: 175px;
+
+    padding: 26px;
+  }
+
+  .asesores-table {
+    min-width: 850px;
+  }
+
+  #modalEditar .modal-dialog {
+    max-width: 650px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE - 768 PX
+============================================================ */
+
+@media (max-width: 767.98px) {
+  .asesores-content {
+    padding: 20px 14px;
+  }
+
+  .asesores-hero {
+    min-height: auto;
+
+    padding: 25px;
+
+    border-radius: 15px;
+  }
+
+  .asesores-hero h1 {
+    font-size: 22px;
+  }
+
+  .asesores-hero p {
+    font-size: 10px;
+  }
+
+  .asesores-hero-icon {
+    display: none;
+  }
+
+  .asesores-section-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .asesores-add-btn {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .asesores-toolbar-actions {
+    width: 100%;
+  }
+
+  .asesores-export-btn,
+  .asesores-register-btn {
+    flex: 1;
+  }
+
+  .asesores-panel-header {
+    padding: 16px;
+  }
+
+  .asesores-count {
+    font-size: 9px;
+  }
+
+  .asesores-pagination {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .pagination-buttons {
+    width: 100%;
+
+    justify-content: flex-end;
+  }
+
+  .asesores-footer {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 6px;
+  }
+
+  #modalEditar .modal-dialog {
+    margin: 10px auto;
+
+    max-width: calc(100% - 20px);
+  }
+
+  #modalEditar .modal-body {
+    padding: 14px;
+  }
+
+  .modal-asesor-header {
+    padding: 11px 14px !important;
+  }
+
+  .asesor-image-label {
+    min-height: 70px;
+
+    padding: 10px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE - 576 PX
+============================================================ */
+
+@media (max-width: 575.98px) {
+  .asesores-content {
+    padding: 18px 12px;
+  }
+
+  .asesores-toolbar {
+    padding: 10px;
+  }
+
+  .asesores-toolbar-actions {
+    flex-direction: column;
+  }
+
+  .asesores-export-btn,
+  .asesores-register-btn {
+    width: 100%;
+
+    flex: none;
+  }
+
+  .asesores-panel-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .asesores-count {
+    align-self: flex-start;
+  }
+
+  .asesores-pagination {
+    padding: 13px 16px;
+  }
+
+  .pagination-buttons {
+    justify-content: space-between;
+  }
+
+  .pagination-btn {
+    flex: 1;
+
+    justify-content: center;
+  }
+
+  .pagination-current {
+    flex-shrink: 0;
+  }
+
+  .asesor-kpi {
+    min-height: 140px;
+  }
+
+  .asesor-kpi-number {
+    font-size: 28px;
+  }
+
+  .pagination-info {
+    flex-wrap: wrap;
+  }
+
+  .modal-title-wrapper {
+    gap: 8px;
+  }
+
+  .modal-asesor-icon {
+    width: 32px;
+    height: 32px;
+
+    font-size: 12px;
+  }
+
+  .modal-asesor-eyebrow {
+    font-size: 6px;
+  }
+
+  #modalEditar .modal-title {
+    font-size: 12px;
+  }
+
+  .modal-form-section {
+    padding: 10px 0;
+  }
+
+  .modal-form-section-title {
+    margin-bottom: 8px;
+  }
+
+  .asesor-image-preview {
+    align-items: flex-start;
+  }
+
+  .preview-data {
+    flex-direction: column;
+
+    gap: 3px;
+  }
+
+  .modal-asesor-footer {
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+  .asesor-btn-cancel,
+  .asesor-btn-save {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE - 480 PX
+============================================================ */
+
+@media (max-width: 480px) {
+  .asesores-content {
+    padding: 16px 10px;
+  }
+
+  .asesores-hero {
+    padding: 22px;
+  }
+
+  .asesores-hero h1 {
+    font-size: 20px;
+  }
+
+  .asesores-hero p {
+    font-size: 9px;
+  }
+
+  .asesores-eyebrow {
+    font-size: 8px;
+  }
+
+  .asesor-kpi {
+    padding: 17px;
+  }
+
+  .asesor-kpi-icon {
+    width: 39px;
+    height: 39px;
+
+    font-size: 14px;
+  }
+
+  .asesor-kpi-top > span {
+    font-size: 7px;
+  }
+
+  .asesor-kpi-number {
+    font-size: 26px;
+  }
+
+  .asesor-kpi-label {
+    font-size: 9px;
+  }
+
+  .asesores-search-wrapper {
+    height: 42px;
+  }
+
+  .asesores-search-form input {
+    font-size: 10px;
+  }
+
+  .asesores-panel-header {
+    padding: 14px;
+  }
+
+  .asesores-panel-header h2 {
+    font-size: 14px;
+  }
+
+  .asesores-empty {
+    min-height: 260px;
+
+    padding: 30px 16px;
+  }
+
+  .empty-icon {
+    width: 58px;
+    height: 58px;
+
+    font-size: 21px;
+  }
+
+  .asesores-empty h3 {
+    font-size: 13px;
+  }
+
+  .asesores-empty p {
+    font-size: 9px;
+  }
+
+  .asesores-footer {
+    padding-top: 15px;
+  }
+
+  .asesores-footer span {
+    font-size: 8px;
+  }
+
+  /* MODAL MUY COMPACTO EN CELULAR */
+
+  #modalEditar .modal-dialog {
+    margin: 6px auto;
+
+    max-width: calc(100% - 12px);
+  }
+
+  #modalEditar .modal-body {
+    padding: 12px;
+  }
+
+  .modal-asesor-header {
+    padding: 10px 12px !important;
+  }
+
+  .modal-asesor-icon {
+    width: 30px;
+    height: 30px;
+
+    font-size: 11px;
+  }
+
+  .modal-form-section {
+    padding: 9px 0;
+  }
+
+  .modal-form-section-title {
+    margin-bottom: 7px;
+  }
+
+  .section-icon {
+    width: 26px;
+    height: 26px;
+
+    font-size: 9px;
+  }
+
+  #modalEditar .form-label {
+    font-size: 8px;
+  }
+
+  #modalEditar .form-control {
+    min-height: 32px;
+
+    padding: 5px 8px;
+
+    font-size: 9px;
+  }
+
+  .asesor-input-group .input-group-text {
+    min-width: 31px;
+
+    font-size: 8px;
+  }
+
+  .asesor-image-label {
+    min-height: 65px;
+
+    padding: 8px;
+  }
+
+  .asesor-image-upload-icon {
+    width: 31px;
+    height: 31px;
+
+    font-size: 11px;
+  }
+
+  .asesor-image-upload-text strong {
+    font-size: 8px;
+  }
+
+  .asesor-image-upload-text span {
+    font-size: 7px;
+  }
+
+  .asesor-image-upload-text small {
+    font-size: 6px;
+  }
+
+  .preview-image-wrapper {
+    width: 42px;
+    height: 42px;
+  }
+
+  .asesor-edit-note {
+    padding: 7px 8px;
+  }
+
+  .modal-asesor-footer {
+    margin-top: 8px;
+
+    padding-top: 8px !important;
+  }
+}
+
+/* ============================================================
+   ACCESIBILIDAD
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ============================================================
+   FOCUS ACCESIBLE
+============================================================ */
+
+.asesores-content a:focus-visible,
+.asesores-content button:focus-visible,
+.asesores-content input:focus-visible {
+  outline: 2px solid rgba(16, 185, 129, 0.55);
+
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   SELECCIÓN DE TEXTO
+============================================================ */
+
+.asesores-content ::selection {
+  background: rgba(16, 185, 129, 0.18);
+
+  color: var(--asesor-text);
+}
+/* =========================================================
+   BOTÓN VER DETALLE
+========================================================= */
+
+.asesor-action-btn.view {
+  color: #0d6efd;
+  background: rgba(13, 110, 253, 0.08);
+  border: 1px solid rgba(13, 110, 253, 0.15);
+}
+
+.asesor-action-btn.view:hover {
+  color: #ffffff;
+  background: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* =========================================================
+   MODAL DETALLE ASESOR
+========================================================= */
+
+.modal-asesor-detalle {
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.modal-asesor-detalle-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #edf0f2;
+  background: #ffffff;
+}
+
+.modal-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-title-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(25, 135, 84, 0.1);
+  color: #198754;
+  font-size: 19px;
+}
+
+.modal-title-eyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #198754;
+  margin-bottom: 2px;
+}
+
+.modal-asesor-detalle-header .modal-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #212529;
+}
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.asesor-detalle-profile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 6px 0 24px;
+  border-bottom: 1px solid #edf0f2;
+}
+
+.asesor-detalle-avatar-wrapper {
+  width: 88px;
+  height: 88px;
+  flex: 0 0 88px;
+}
+
+.asesor-detalle-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.asesor-detalle-avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #198754;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.asesor-detalle-profile-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.asesor-detalle-label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #6c757d;
+}
+
+.asesor-detalle-profile-info h3 {
+  margin: 0 0 5px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #212529;
+  word-break: break-word;
+}
+
+.asesor-detalle-id {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #6c757d;
+  font-size: 13px;
+}
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+.asesor-detalle-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.asesor-detalle-status.active {
+  color: #198754;
+  background: rgba(25, 135, 84, 0.1);
+}
+
+.asesor-detalle-status.inactive {
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+}
+
+/* =========================================================
+   SECCIONES
+========================================================= */
+
+.asesor-detalle-section {
+  padding: 22px 0;
+  border-bottom: 1px solid #edf0f2;
+}
+
+.asesor-detalle-section:last-child {
+  border-bottom: 0;
+}
+
+.asesor-detalle-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #212529;
+}
+
+.asesor-detalle-section-title i {
+  color: #198754;
+}
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+.asesor-detalle-item {
+  min-height: 76px;
+  padding: 13px 15px;
+  border: 1px solid #edf0f2;
+  border-radius: 12px;
+  background: #fafbfc;
+}
+
+.asesor-detalle-item-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+  color: #6c757d;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.asesor-detalle-item-label i {
+  width: 14px;
+  text-align: center;
+}
+
+.asesor-detalle-item strong {
+  display: block;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   FECHAS
+========================================================= */
+
+.asesor-detalle-date-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px;
+  border: 1px solid #edf0f2;
+  border-radius: 12px;
+  background: #fafbfc;
+}
+
+.asesor-detalle-date-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(25, 135, 84, 0.1);
+  color: #198754;
+}
+
+.asesor-detalle-date-card span {
+  display: block;
+  margin-bottom: 3px;
+  color: #6c757d;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.asesor-detalle-date-card strong {
+  display: block;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.modal-asesor-detalle-footer {
+  padding: 1rem 1.5rem;
+  background: #fafbfc;
+  border-top: 1px solid #edf0f2;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 575.98px) {
+  .modal-asesor-detalle-header {
+    padding: 1rem;
+  }
+
+  .asesor-detalle-profile {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .asesor-detalle-status {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .asesor-detalle-profile-info h3 {
+    font-size: 19px;
+  }
+
+  .asesor-detalle-avatar-wrapper,
+  .asesor-detalle-avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .asesor-detalle-avatar-wrapper {
+    flex-basis: 72px;
+  }
+}

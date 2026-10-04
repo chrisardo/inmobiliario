@@ -1,94 +1,2084 @@
-/* ===== LAYOUT GENERAL ===== */
+/* ============================================================
+   CoDevPro Technology
+   Archivo: css/menu_sidebar.css
+   Módulo: Panel Administrativo
+============================================================ */
+
+/* ============================================================
+   VARIABLES
+============================================================ */
+
+:root {
+  --sidebar-width: 270px;
+  --sidebar-collapsed-width: 76px;
+
+  --sidebar-bg: #0f172a;
+  --sidebar-bg-secondary: #111827;
+
+  --primary: #10b981;
+  --primary-dark: #059669;
+
+  --blue: #3b82f6;
+  --purple: #8b5cf6;
+  --orange: #f59e0b;
+
+  --page-bg: #f5f7fb;
+
+  --white: #ffffff;
+
+  --text-dark: #111827;
+  --text-primary: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  --border: #e5e7eb;
+
+  --radius: 16px;
+
+  --shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
+  width: 100%;
   height: 100%;
+
   margin: 0;
+  padding: 0;
+
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+
+  background: var(--page-bg);
+
+  color: var(--text-dark);
+}
+
+/* ============================================================
+   LAYOUT
+============================================================ */
+
+.admin-layout {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+
   overflow: hidden;
 }
-/* ===== SIDEBAR BASE ===== */
-#sidebar {
-  width: 250px;
-  min-height: 100vh;
-}
 
-/* ===== DESKTOP ===== */
-@media (min-width: 768px) {
-  #sidebar {
-    display: block;
-  }
-}
+/* ============================================================
+   SIDEBAR
+============================================================ */
 
-/* ===== MÓVIL ===== */
-@media (max-width: 767.98px) {
-  #sidebar {
-    display: none;
-  }
+.admin-sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
 
-  #sidebar.show {
-    display: block;
-  }
-}
+  flex-shrink: 0;
 
-/* ===== Responsive ===== */
-@media (max-width: 991.98px) {
-  #sidebar {
-    margin-left: -250px; /* oculto por defecto */
-  }
-
-  #sidebar.show {
-    margin-left: 0;
-  }
-}
-
-/*Ajustar pantalla*/
-/* ===== CONTENIDO PRINCIPAL ===== */
-#content {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
+
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+
+  color: white;
+
+  position: relative;
+
+  z-index: 1100;
+
+  transition:
+    width 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* ============================================================
+   SIDEBAR HEADER
+============================================================ */
+
+.sidebar-header {
+  height: 76px;
+
+  padding: 14px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebar-brand {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+}
+
+.sidebar-brand img {
+  width: 100%;
+
+  max-width: 205px;
+
+  height: 48px;
+
+  object-fit: contain;
+
+  object-position: left center;
+}
+
+.sidebar-close {
+  width: 36px;
+  height: 36px;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #94a3b8;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.sidebar-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+
+  color: white;
+}
+
+/* ============================================================
+   EMPRESA
+============================================================ */
+
+.sidebar-company {
+  margin: 18px 15px;
+
+  padding: 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.055);
+
+  transition:
+    margin 0.3s ease,
+    padding 0.3s ease;
+}
+
+.company-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  overflow: hidden;
+
+  background: rgba(16, 185, 129, 0.15);
+
+  color: #34d399;
+
+  font-size: 16px;
+}
+
+.company-icon img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.company-info {
   min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
   overflow: hidden;
 }
 
-/* Navbar superior */
-#content .navbar {
-  flex-shrink: 0;
+.company-info strong {
+  overflow: hidden;
+
+  color: #f8fafc;
+
+  font-size: 13px;
+
+  font-weight: 650;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
 }
 
-/* Área de contenido scrolleable */
-#content .container-fluid {
-  flex-grow: 1;
+.company-info span {
+  color: #64748b;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+.sidebar-navigation {
+  flex: 1;
+
+  padding: 0 13px 10px;
+
   overflow-y: auto;
 }
 
-/*icono buscar*/
-.icono-buscar {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  color: #6c757d; 
-  pointer-events: none;
+.sidebar-navigation::-webkit-scrollbar {
+  width: 4px;
 }
 
-/*********************************/
-/* ===== KPI CARDS HOVER ===== */
-.kpi-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+.sidebar-navigation::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+
+  border-radius: 20px;
+}
+
+.sidebar-navigation {
+  scrollbar-width: thin;
+
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+/* ============================================================
+   SECTION TITLE
+============================================================ */
+
+.sidebar-section-title {
+  margin: 22px 12px 9px;
+
+  color: #475569;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  transition: margin 0.3s ease;
+}
+
+/* ============================================================
+   SIDEBAR LINKS
+============================================================ */
+
+.sidebar-link {
+  min-height: 45px;
+
+  margin-bottom: 4px;
+
+  padding: 7px 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border-radius: 10px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  text-decoration: none;
+
+  position: relative;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    width 0.3s ease;
+}
+
+.sidebar-link:hover {
+  color: #f8fafc;
+
+  background: rgba(255, 255, 255, 0.055);
+
+  transform: translateX(2px);
+}
+
+.sidebar-link.active {
+  color: white;
+
+  background: linear-gradient(
+    90deg,
+    rgba(16, 185, 129, 0.18),
+    rgba(16, 185, 129, 0.06)
+  );
+
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+/* ============================================================
+   LINK LEFT
+============================================================ */
+
+.sidebar-link-left {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  overflow: hidden;
+}
+
+/* ============================================================
+   ICONOS
+============================================================ */
+
+.sidebar-link-icon {
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.sidebar-link:hover .sidebar-link-icon,
+.sidebar-link.active .sidebar-link-icon {
+  color: #34d399;
+
+  background: rgba(16, 185, 129, 0.08);
+}
+
+/* ============================================================
+   BADGE
+============================================================ */
+
+.sidebar-badge {
+  min-width: 22px;
+  height: 19px;
+
+  margin-left: auto;
+
+  padding: 2px 6px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background: #ef4444;
+
+  color: white;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   COLLAPSE
+============================================================ */
+
+.sidebar-collapse-link {
+  justify-content: space-between;
+
   cursor: pointer;
 }
 
-.kpi-card:hover {
-  transform: scale(1.05); /* 🔍 aumenta tamaño */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  z-index: 10;
+.collapse-arrow {
+  flex-shrink: 0;
+
+  color: #475569;
+
+  font-size: 9px;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
 }
-.kpi-card:hover {
-  transform: translateY(-4px) scale(1.05);
+
+.sidebar-collapse-link[aria-expanded="true"] {
+  color: #f8fafc;
 }
-@media (max-width: 768px) {
-  .kpi-card:hover {
+
+.sidebar-collapse-link[aria-expanded="true"] .collapse-arrow {
+  transform: rotate(180deg);
+
+  color: #34d399;
+}
+
+/* ============================================================
+   SUBMENÚ
+============================================================ */
+
+.sidebar-submenu {
+  margin: 0 0 6px 20px;
+
+  padding: 3px 0 3px 12px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-sublink {
+  min-height: 37px;
+
+  padding: 7px 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  border-radius: 8px;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-sublink i {
+  width: 16px;
+
+  font-size: 10px;
+
+  text-align: center;
+}
+
+.sidebar-sublink:hover {
+  color: #e2e8f0;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  transform: translateX(2px);
+}
+
+.sidebar-sublink.active {
+  color: #34d399;
+
+  background: rgba(16, 185, 129, 0.07);
+}
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+.logout-link {
+  margin-top: 8px;
+}
+
+.logout-link:hover {
+  color: #fca5a5;
+
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.logout-link:hover .sidebar-link-icon {
+  color: #f87171;
+}
+
+/* ============================================================
+   FOOTER SIDEBAR
+============================================================ */
+
+.sidebar-footer {
+  margin: 14px;
+
+  padding: 11px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 10px;
+
+  color: #475569;
+
+  font-size: 10px;
+
+  transition:
+    width 0.3s ease,
+    margin 0.3s ease,
+    padding 0.3s ease;
+}
+
+.sidebar-security-icon {
+  color: #10b981;
+}
+
+/* ============================================================
+   MAIN CONTENT
+============================================================ */
+
+.admin-content {
+  min-width: 0;
+
+  flex: 1;
+
+  height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  transition: margin-left 0.3s ease;
+}
+
+/* ============================================================
+   TOPBAR
+============================================================ */
+
+.admin-topbar {
+  height: 78px;
+
+  flex-shrink: 0;
+
+  padding: 0 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  border-bottom: 1px solid var(--border);
+
+  backdrop-filter: blur(12px);
+
+  position: relative;
+
+  z-index: 50;
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+
+  align-items: center;
+}
+
+.topbar-left {
+  gap: 15px;
+}
+
+.topbar-right {
+  gap: 18px;
+}
+
+/* ============================================================
+   BOTÓN SIDEBAR
+============================================================ */
+
+.sidebar-toggle {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: #475569;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  color: var(--primary);
+
+  border-color: rgba(16, 185, 129, 0.3);
+
+  background: #f0fdf9;
+}
+
+.sidebar-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================
+   TOPBAR TITLE
+============================================================ */
+
+.topbar-title {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.topbar-title span {
+  color: #94a3b8;
+
+  font-size: 10px;
+}
+
+.topbar-title strong {
+  color: #1e293b;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+/* ============================================================
+   TOPBAR NOTIFICACIONES
+============================================================ */
+
+.topbar-icon {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  color: #64748b;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.topbar-icon:hover {
+  color: var(--primary);
+
+  background: #f0fdf9;
+}
+
+.notification-dot {
+  min-width: 17px;
+  height: 17px;
+
+  padding: 0 4px;
+
+  position: absolute;
+
+  top: 1px;
+  right: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid white;
+
+  border-radius: 20px;
+
+  background: #ef4444;
+
+  color: white;
+
+  font-size: 7px;
+
+  font-weight: 800;
+}
+
+/* ============================================================
+   PERFIL
+============================================================ */
+
+.topbar-profile {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #334155;
+
+  text-decoration: none;
+}
+
+.topbar-avatar {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 2px solid #ecfdf5;
+
+  border-radius: 50%;
+
+  background: #f1f5f9;
+
+  color: #64748b;
+}
+
+.topbar-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.topbar-user {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.topbar-user strong {
+  max-width: 150px;
+
+  overflow: hidden;
+
+  color: #334155;
+
+  font-size: 12px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.topbar-user span {
+  color: #94a3b8;
+
+  font-size: 9px;
+}
+
+.profile-arrow {
+  color: #94a3b8;
+
+  font-size: 9px;
+}
+
+/* ============================================================
+   DASHBOARD
+============================================================ */
+
+.dashboard-content {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 35px 32px 25px;
+}
+
+.dashboard-content::-webkit-scrollbar {
+  width: 7px;
+}
+
+.dashboard-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+
+  border-radius: 20px;
+}
+
+.dashboard-content {
+  scrollbar-width: thin;
+
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+
+.dashboard-hero {
+  margin-bottom: 35px;
+
+  padding: 30px 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(120deg, #0f172a, #172554);
+
+  color: white;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.dashboard-hero::before {
+  content: "";
+
+  width: 220px;
+  height: 220px;
+
+  position: absolute;
+
+  right: 80px;
+  bottom: -170px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-hero::after {
+  content: "";
+
+  width: 300px;
+  height: 300px;
+
+  position: absolute;
+
+  right: -100px;
+  top: -150px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-content {
+  position: relative;
+
+  z-index: 2;
+}
+
+.dashboard-eyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #34d399;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.6px;
+}
+
+.dashboard-hero h1 {
+  margin: 0 0 8px;
+
+  font-size: 25px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.5px;
+}
+
+.dashboard-hero p {
+  margin: 0;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+.hero-date {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 10px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #cbd5e1;
+
+  font-size: 11px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+/* ============================================================
+   SECCIONES
+============================================================ */
+
+.dashboard-section {
+  margin-bottom: 35px;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+.section-heading h2,
+.panel-header h2 {
+  margin: 0;
+
+  color: #1e293b;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+/* ============================================================
+   KPI
+============================================================ */
+
+.dashboard-kpi {
+  min-height: 205px;
+
+  padding: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background: white;
+
+  box-shadow: var(--shadow);
+
+  position: relative;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dashboard-kpi:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+}
+
+.dashboard-kpi::after {
+  content: "";
+
+  width: 120px;
+  height: 120px;
+
+  position: absolute;
+
+  right: -55px;
+  bottom: -55px;
+
+  border-radius: 50%;
+
+  opacity: 0.08;
+}
+
+.kpi-blue::after {
+  background: var(--blue);
+}
+
+.kpi-green::after {
+  background: var(--primary);
+}
+
+.kpi-purple::after {
+  background: var(--purple);
+}
+
+/* ============================================================
+   KPI TOP
+============================================================ */
+
+.kpi-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.kpi-icon {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+}
+
+.kpi-blue .kpi-icon {
+  background: #eff6ff;
+
+  color: var(--blue);
+}
+
+.kpi-green .kpi-icon {
+  background: #ecfdf5;
+
+  color: var(--primary);
+}
+
+.kpi-purple .kpi-icon {
+  background: #f5f3ff;
+
+  color: var(--purple);
+}
+
+.kpi-status {
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  background: #f8fafc;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+
+  font-weight: 650;
+}
+
+/* ============================================================
+   KPI CONTENT
+============================================================ */
+
+.kpi-content {
+  margin-top: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.kpi-number {
+  color: #0f172a;
+
+  font-size: 38px;
+
+  font-weight: 750;
+
+  line-height: 1;
+}
+
+.kpi-label {
+  margin-top: 7px;
+
+  color: #64748b;
+
+  font-size: 11px;
+}
+
+/* ============================================================
+   KPI LINK
+============================================================ */
+
+.kpi-link {
+  margin-top: auto;
+
+  padding-top: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #64748b;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.kpi-link:hover {
+  color: var(--primary);
+}
+
+.kpi-link i {
+  font-size: 8px;
+
+  transition: transform 0.2s ease;
+}
+
+.kpi-link:hover i {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   PANELES
+============================================================ */
+
+.dashboard-panel {
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background: white;
+
+  box-shadow: var(--shadow);
+
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 23px 24px 17px;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* ============================================================
+   QUICK ACTIONS
+============================================================ */
+
+.quick-actions {
+  padding: 8px 12px;
+}
+
+.quick-action {
+  min-height: 66px;
+
+  padding: 10px 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  border-radius: 11px;
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.quick-action:hover {
+  background: #f8fafc;
+
+  transform: translateX(3px);
+}
+
+.quick-action-icon {
+  width: 39px;
+  height: 39px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+}
+
+.quick-action-icon.green {
+  color: var(--primary);
+
+  background: #ecfdf5;
+}
+
+.quick-action-icon.purple {
+  color: var(--purple);
+
+  background: #f5f3ff;
+}
+
+.quick-action-icon.orange {
+  color: var(--orange);
+
+  background: #fffbeb;
+}
+
+.quick-action-icon.blue {
+  color: var(--blue);
+
+  background: #eff6ff;
+}
+
+.quick-action > div:nth-child(2) {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.quick-action strong {
+  color: #334155;
+
+  font-size: 11px;
+}
+
+.quick-action span {
+  color: #94a3b8;
+
+  font-size: 9px;
+}
+
+.quick-action > i {
+  color: #cbd5e1;
+
+  font-size: 9px;
+}
+
+/* ============================================================
+   ACTIVITY
+============================================================ */
+
+.activity-list {
+  flex: 1;
+
+  padding: 5px 20px;
+}
+
+.activity-item {
+  min-height: 67px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.activity-item:last-child {
+  border-bottom: 0;
+}
+
+.activity-avatar {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f0fdf9;
+
+  color: var(--primary);
+
+  font-size: 11px;
+}
+
+.activity-info {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.activity-info strong {
+  color: #334155;
+
+  font-size: 11px;
+}
+
+.activity-info span {
+  max-width: 320px;
+
+  overflow: hidden;
+
+  color: #94a3b8;
+
+  font-size: 9px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.activity-date {
+  flex-shrink: 0;
+
+  color: #cbd5e1;
+
+  font-size: 8px;
+}
+
+/* ============================================================
+   EMPTY
+============================================================ */
+
+.empty-state {
+  min-height: 220px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 45px;
+  height: 45px;
+
+  margin-bottom: 5px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f8fafc;
+
+  color: #cbd5e1;
+}
+
+.empty-state strong {
+  color: #64748b;
+
+  font-size: 11px;
+}
+
+.empty-state span {
+  color: #94a3b8;
+
+  font-size: 9px;
+}
+
+/* ============================================================
+   PANEL FOOTER
+============================================================ */
+
+.panel-footer {
+  padding: 14px 20px;
+
+  border-top: 1px solid #f1f5f9;
+}
+
+.panel-footer a {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  color: var(--primary);
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  text-decoration: none;
+}
+
+.panel-footer i {
+  font-size: 8px;
+
+  transition: transform 0.2s ease;
+}
+
+.panel-footer a:hover i {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.dashboard-footer {
+  margin-top: 25px;
+
+  padding-top: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-top: 1px solid var(--border);
+
+  color: #94a3b8;
+
+  font-size: 9px;
+}
+
+/* ============================================================
+   OVERLAY
+============================================================ */
+
+.sidebar-overlay {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.55);
+
+  backdrop-filter: blur(2px);
+
+  z-index: 1050;
+}
+
+/* ============================================================
+   SIDEBAR CONTRAÍDO - ESCRITORIO
+============================================================ */
+
+/* ============================================================
+   SIDEBAR CONTRAÍDO - ESCRITORIO
+============================================================ */
+
+@media (min-width: 992px) {
+  /* --------------------------------------------------------
+       ANCHO DEL SIDEBAR
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .admin-sidebar {
+    width: var(--sidebar-collapsed-width);
+
+    min-width: var(--sidebar-collapsed-width);
+  }
+
+  /* --------------------------------------------------------
+       CONTENIDO PRINCIPAL
+       
+       Se mantiene el diseño del contenido.
+       Solamente utiliza el espacio liberado.
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .admin-content {
+    width: calc(100% - var(--sidebar-collapsed-width));
+
+    margin-left: 0;
+  }
+
+  /* --------------------------------------------------------
+       EMPRESA
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-company {
+    margin: 18px 10px;
+
+    padding: 10px 8px;
+
+    justify-content: center;
+
+    gap: 0;
+  }
+
+  .admin-layout.sidebar-collapsed .company-info {
+    display: none;
+  }
+
+  .admin-layout.sidebar-collapsed .company-icon {
+    width: 42px;
+
+    height: 42px;
+
+    min-width: 42px;
+  }
+
+  /* --------------------------------------------------------
+       TÍTULOS DE SECCIÓN
+       
+       PRINCIPAL
+       GESTIÓN
+       CUENTA
+       
+       Se convierten en pequeñas líneas.
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-section-title {
+    height: 1px;
+
+    margin: 15px 12px;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    font-size: 0;
+
+    line-height: 0;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* --------------------------------------------------------
+       ENLACES PRINCIPALES
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-link {
+    width: 52px;
+
+    min-height: 45px;
+
+    margin: 0 auto 5px;
+
+    padding: 7px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0;
+
+    position: relative;
+
     transform: none;
-    box-shadow: none;
+  }
+
+  /* --------------------------------------------------------
+       ENLACES SIMPLES
+       
+       Inicio
+       Mensajes
+       Mi perfil
+       Cerrar sesión
+       
+       IMPORTANTE:
+       Ocultar solamente el texto.
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed
+    .sidebar-link
+    > span:not(.sidebar-link-icon):not(.sidebar-link-left):not(.sidebar-badge) {
+    display: none;
+  }
+
+  /* --------------------------------------------------------
+       ENLACES CON SUBMENÚ
+       
+       Propiedades
+       Asesores
+       Testimonios
+       
+       IMPORTANTE:
+       .sidebar-link-left DEBE permanecer visible
+       porque contiene el icono.
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-link-left {
+    width: 34px;
+
+    min-width: 34px;
+
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0;
+
+    overflow: visible;
+  }
+
+  /* --------------------------------------------------------
+       OCULTAR SOLO EL TEXTO DE:
+       
+       Propiedades
+       Asesores
+       Testimonios
+       
+       NO ocultar .sidebar-link-icon
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed
+    .sidebar-link-left
+    > span:not(.sidebar-link-icon) {
+    display: none;
+  }
+
+  /* --------------------------------------------------------
+       ICONOS
+       
+       Todos los iconos permanecen visibles.
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-link-icon {
+    width: 34px;
+
+    height: 34px;
+
+    min-width: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    border-radius: 8px;
+  }
+
+  /* Icono cuando el enlace está activo */
+
+  .admin-layout.sidebar-collapsed .sidebar-link.active .sidebar-link-icon {
+    color: #34d399;
+
+    background: rgba(16, 185, 129, 0.08);
+  }
+
+  /* Icono al pasar el mouse */
+
+  .admin-layout.sidebar-collapsed .sidebar-link:hover .sidebar-link-icon {
+    color: #34d399;
+
+    background: rgba(16, 185, 129, 0.08);
+  }
+
+  /* --------------------------------------------------------
+       FLECHAS
+       
+       Las flechas de Propiedades, Asesores y Testimonios
+       desaparecen cuando el sidebar está contraído.
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .collapse-arrow {
+    display: none;
+  }
+
+  /* --------------------------------------------------------
+       BADGE DE MENSAJES
+       
+       Mantener visible sobre el icono.
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-badge {
+    display: flex !important;
+
+    position: absolute;
+
+    top: 1px;
+
+    right: 3px;
+
+    min-width: 16px;
+
+    width: auto;
+
+    height: 16px;
+
+    margin: 0;
+
+    padding: 1px 4px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 20px;
+
+    font-size: 7px;
+
+    line-height: 1;
+
+    z-index: 10;
+  }
+
+  /* --------------------------------------------------------
+       SUBMENÚS
+       
+       No mostrar:
+       - Ver propiedades
+       - Registrar propiedad
+       - Categorías
+       - Lista de asesores
+       - Registrar asesor
+       - Ver testimonios
+       - Registrar testimonio
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-submenu {
+    display: none !important;
+  }
+
+  /* --------------------------------------------------------
+       LOGOUT
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .logout-link {
+    margin-top: 8px;
+  }
+
+  /* --------------------------------------------------------
+       FOOTER
+    -------------------------------------------------------- */
+
+  .admin-layout.sidebar-collapsed .sidebar-footer {
+    width: 52px;
+
+    height: 40px;
+
+    min-height: 40px;
+
+    margin: 14px auto;
+
+    padding: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0;
+  }
+
+  .admin-layout.sidebar-collapsed .sidebar-footer span {
+    display: none;
+  }
+
+  .admin-layout.sidebar-collapsed .sidebar-footer i {
+    display: block;
+
+    font-size: 13px;
+  }
+}
+
+/* ============================================================
+   TABLET / MÓVIL
+============================================================ */
+
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: var(--sidebar-width);
+
+    transform: translateX(-100%);
+
+    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .admin-sidebar.show {
+    transform: translateX(0);
+  }
+
+  .sidebar-close {
+    display: flex;
+  }
+
+  .sidebar-overlay.show {
+    display: block;
+  }
+
+  .admin-topbar {
+    padding: 0 20px;
+  }
+
+  .dashboard-content {
+    padding: 25px 20px;
+  }
+}
+
+/* ============================================================
+   MÓVIL
+============================================================ */
+
+@media (max-width: 767.98px) {
+  .admin-topbar {
+    height: 68px;
+  }
+
+  .topbar-title span {
+    display: none;
+  }
+
+  .topbar-title strong {
+    font-size: 14px;
+  }
+
+  .topbar-right {
+    gap: 8px;
+  }
+
+  .topbar-user {
+    display: none;
+  }
+
+  .profile-arrow {
+    display: none;
+  }
+
+  .dashboard-hero {
+    padding: 24px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .hero-date {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 21px;
+  }
+
+  .dashboard-footer {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 5px;
+  }
+
+  .activity-info span {
+    max-width: 180px;
+  }
+}
+
+/* ============================================================
+   MÓVILES PEQUEÑOS
+============================================================ */
+
+@media (max-width: 480px) {
+  .dashboard-content {
+    padding: 20px 14px;
+  }
+
+  .admin-topbar {
+    padding: 0 14px;
+  }
+
+  .sidebar-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .topbar-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .topbar-avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dashboard-hero {
+    border-radius: 14px;
+
+    margin-bottom: 25px;
+  }
+
+  .dashboard-kpi {
+    min-height: 190px;
+  }
+
+  .kpi-number {
+    font-size: 34px;
+  }
+
+  .activity-item {
+    gap: 9px;
+  }
+
+  .activity-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .activity-date {
+    display: none;
+  }
+}
+
+/* ============================================================
+   REDUCIR ANIMACIONES
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
   }
 }
