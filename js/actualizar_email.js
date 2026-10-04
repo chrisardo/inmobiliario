@@ -1,3 +1,4 @@
+//Toda esta parte pertenece a js/actualizar_email.js
 $(document).ready(function () {
   $("#formEditarEmail").on("submit", function (e) {
     e.preventDefault();

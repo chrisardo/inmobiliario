@@ -1,3 +1,4 @@
+//Toda esta parte pertenece a js/visibilidad_email.js
 //Mostrar u ocultar email
 let emailVisible = false;
 let emailModalVisible = false;

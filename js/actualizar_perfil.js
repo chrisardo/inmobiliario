@@ -1,3 +1,4 @@
+//Toda esta parte pertenece a js/actualizar_perfil.js
 //Para mostrar u ocultar contraseña
 const togglePassword = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("contrasenaActual");

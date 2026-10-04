@@ -1,3 +1,4 @@
+//Toda esta parte pertenece a js/visualizar_imagen.js
 ////Previsualizar imagen del modal
 document.addEventListener("DOMContentLoaded", function () {
   const inputImagen = document.getElementById("imagen");

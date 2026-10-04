@@ -1,3 +1,4 @@
+/*Toda esta parte pertenece a js/numero.js*/
 document.addEventListener("DOMContentLoaded", () => {
   const counters = document.querySelectorAll(".kpi-number");
 
