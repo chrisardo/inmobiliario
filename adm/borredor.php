@@ -162,23 +162,21 @@ if ($stmtMensajesNoLeidos) {
 
     <div class="admin-layout">
 
-
         <!-- =====================================================
-            SIDEBAR
-        ====================================================== -->
+         SIDEBAR
+    ====================================================== -->
 
         <aside id="sidebar" class="admin-sidebar">
-            <!-- Empresa -->
-
+            <!-- EMPRESA -->
             <div class="sidebar-company">
 
                 <div class="company-icon">
 
-                    <?php if (!empty($fotoPerfil)): ?>
+                    <?php if ($fotoPerfil): ?>
 
                         <img
                             src="<?= htmlspecialchars($fotoPerfil) ?>"
-                            alt="Perfil">
+                            alt="Empresa">
 
                     <?php else: ?>
 
@@ -191,7 +189,7 @@ if ($stmtMensajesNoLeidos) {
                 <div class="company-info">
 
                     <strong>
-                        <?= htmlspecialchars($usuario['nombreEmpresa'] ?? 'Empresa') ?>
+                        <?= htmlspecialchars($nombreEmpresa) ?>
                     </strong>
 
                     <span>
@@ -203,8 +201,7 @@ if ($stmtMensajesNoLeidos) {
             </div>
 
 
-            <!-- Navegación -->
-
+            <!-- NAVEGACIÓN -->
             <nav class="sidebar-navigation">
 
                 <div class="sidebar-section-title">
@@ -212,37 +209,47 @@ if ($stmtMensajesNoLeidos) {
                 </div>
 
 
+                <!-- INICIO -->
                 <a
                     href="adm_index.php"
                     class="sidebar-link">
 
-                    <span class="sidebar-link-icon">
-                        <i class="fa-solid fa-house"></i>
-                    </span>
+                    <span class="sidebar-link-left">
 
-                    <span>
-                        Inicio
+                        <span class="sidebar-link-icon">
+                            <i class="fa-solid fa-house"></i>
+                        </span>
+
+                        <span>
+                            Inicio
+                        </span>
+
                     </span>
 
                 </a>
 
 
+                <!-- MENSAJES -->
                 <a
                     href="adm_mensajes.php"
                     class="sidebar-link">
 
-                    <span class="sidebar-link-icon">
-                        <i class="fa-solid fa-envelope"></i>
+                    <span class="sidebar-link-left">
+
+                        <span class="sidebar-link-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+
+                        <span>
+                            Mensajes
+                        </span>
+
                     </span>
 
-                    <span>
-                        Mensajes
-                    </span>
-
-                    <?php if (!empty($totalContacto)): ?>
+                    <?php if ($totalMensajes > 0): ?>
 
                         <span class="sidebar-badge">
-                            <?= number_format($totalContacto) ?>
+                            <?= $totalMensajes > 99 ? '99+' : $totalMensajes ?>
                         </span>
 
                     <?php endif; ?>
@@ -255,15 +262,13 @@ if ($stmtMensajesNoLeidos) {
                 </div>
 
 
-                <!-- Propiedades -->
-
+                <!-- PROPIEDADES -->
                 <a
                     class="sidebar-link sidebar-collapse-link"
                     data-bs-toggle="collapse"
-                    href="#menuPropiedades"
+                    href="#menuInventario"
                     role="button"
-                    aria-expanded="false"
-                    aria-controls="menuPropiedades">
+                    aria-expanded="false">
 
                     <span class="sidebar-link-left">
 
@@ -282,58 +287,68 @@ if ($stmtMensajesNoLeidos) {
                 </a>
 
 
-                <div
-                    class="collapse sidebar-submenu"
-                    id="menuPropiedades">
+                <ul
+                    class="collapse list-unstyled sidebar-submenu"
+                    id="menuInventario">
 
-                    <a
-                        href="adm_lista_propiedades.php"
-                        class="sidebar-sublink">
+                    <li>
 
-                        <i class="fa-solid fa-list"></i>
+                        <a
+                            href="adm_lista_propiedades.php"
+                            class="sidebar-sublink">
 
-                        <span>
-                            Ver propiedades
-                        </span>
+                            <i class="fa-solid fa-list"></i>
 
-                    </a>
+                            <span>
+                                Ver propiedades
+                            </span>
 
-                    <a
-                        href="adm_registrar_propiedad.php"
-                        class="sidebar-sublink">
+                        </a>
 
-                        <i class="fa-solid fa-plus"></i>
+                    </li>
 
-                        <span>
-                            Registrar propiedad
-                        </span>
+                    <li>
 
-                    </a>
+                        <a
+                            href="adm_registrar_propiedad.php"
+                            class="sidebar-sublink">
 
-                    <a
-                        href="adm_categorias.php"
-                        class="sidebar-sublink">
+                            <i class="fa-solid fa-circle-plus"></i>
 
-                        <i class="fa-solid fa-layer-group"></i>
+                            <span>
+                                Registrar propiedad
+                            </span>
 
-                        <span>
-                            Categorías
-                        </span>
+                        </a>
 
-                    </a>
+                    </li>
 
-                </div>
+                    <li>
+
+                        <a
+                            href="adm_categorias.php"
+                            class="sidebar-sublink">
+
+                            <i class="fa-solid fa-layer-group"></i>
+
+                            <span>
+                                Categorías
+                            </span>
+
+                        </a>
+
+                    </li>
+
+                </ul>
 
 
-                <!-- Asesores -->
-
+                <!-- ASESORES -->
                 <a
-                    class="sidebar-link sidebar-collapse-link"
+                    class="sidebar-link sidebar-collapse-link active"
                     data-bs-toggle="collapse"
-                    href="#menuAsesores"
+                    href="#menuClientes"
                     role="button"
-                    aria-expanded="false"
-                    aria-controls="menuAsesores">
+                    aria-expanded="true">
 
                     <span class="sidebar-link-left">
 
@@ -352,124 +367,79 @@ if ($stmtMensajesNoLeidos) {
                 </a>
 
 
-                <div
-                    class="collapse sidebar-submenu"
-                    id="menuAsesores">
+                <ul
+                    class="collapse show list-unstyled sidebar-submenu"
+                    id="menuClientes">
 
-                    <a
-                        href="adm_lista_asesores.php"
-                        class="sidebar-sublink">
+                    <li>
 
-                        <i class="fa-solid fa-users"></i>
+                        <a
+                            href="adm_registrar_asesor.php"
+                            class="sidebar-sublink active">
 
-                        <span>
-                            Lista de asesores
-                        </span>
+                            <i class="fa-solid fa-user-plus"></i>
 
-                    </a>
+                            <span>
+                                Registrar asesor
+                            </span>
 
-                    <a
-                        href="adm_registrar_asesor.php"
-                        class="sidebar-sublink">
+                        </a>
 
-                        <i class="fa-solid fa-user-plus"></i>
+                    </li>
 
-                        <span>
-                            Registrar asesor
-                        </span>
+                    <li>
 
-                    </a>
+                        <a
+                            href="adm_lista_asesores.php"
+                            class="sidebar-sublink">
 
-                </div>
+                            <i class="fa-solid fa-users"></i>
 
-                <!-- =====================================================
-                    TESTIMONIOS
-                ====================================================== -->
+                            <span>
+                                Lista de asesores
+                            </span>
 
-                <a
-                    class="sidebar-link sidebar-collapse-link"
-                    data-bs-toggle="collapse"
-                    href="#menuTestimonios"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="menuTestimonios">
-                    <span class="sidebar-link-left">
+                        </a>
 
-                        <span class="sidebar-link-icon">
-                            <i class="fa-solid fa-comments"></i>
-                        </span>
+                    </li>
 
-                        <span>
-                            Testimonios
-                        </span>
+                </ul>
 
-                    </span>
-
-                    <i class="fa-solid fa-chevron-down collapse-arrow"></i>
-
-                </a>
-
-                <div
-                    class="collapse sidebar-submenu"
-                    id="menuTestimonios">
-                    <a
-                        href="adm_lista_testimonios.php"
-                        class="sidebar-sublink">
-
-                        <i class="fa-solid fa-list"></i>
-
-                        <span>
-                            Ver testimonios
-                        </span>
-
-                    </a>
-
-
-                    <a
-                        href="adm_registrar_testimonio.php"
-                        class="sidebar-sublink">
-
-                        <i class="fa-solid fa-plus"></i>
-
-                        <span>
-                            Registrar testimonio
-                        </span>
-
-                    </a>
-
-
-                </div>
 
                 <div class="sidebar-section-title">
                     CUENTA
                 </div>
-
-
                 <a
                     href="adm_perfil.php"
                     class="sidebar-link">
 
-                    <span class="sidebar-link-icon">
-                        <i class="fa-solid fa-user"></i>
-                    </span>
+                    <span class="sidebar-link-left">
 
-                    <span>
+                        <span class="sidebar-link-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+
                         Mi perfil
+
                     </span>
 
                 </a>
 
-
+                <!-- CERRAR SESIÓN -->
                 <a
                     href="../controladores/desconectar.php"
                     class="sidebar-link logout-link">
 
-                    <span class="sidebar-link-icon">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                    </span>
+                    <span class="sidebar-link-left">
 
-                    <span>
-                        Cerrar sesión
+                        <span class="sidebar-link-icon">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </span>
+
+                        <span>
+                            Cerrar sesión
+                        </span>
+
                     </span>
 
                 </a>
@@ -477,14 +447,13 @@ if ($stmtMensajesNoLeidos) {
             </nav>
 
 
-            <!-- Footer sidebar -->
-
+            <!-- FOOTER -->
             <div class="sidebar-footer">
 
-                <i class="fa-solid fa-shield-halved"></i>
+                <i class="fa-solid fa-shield-halved sidebar-security-icon"></i>
 
                 <span>
-                    Sesión segura
+                    Sistema seguro
                 </span>
 
             </div>
@@ -492,8 +461,7 @@ if ($stmtMensajesNoLeidos) {
         </aside>
 
 
-        <!-- Overlay móvil -->
-
+        <!-- OVERLAY MÓVIL -->
         <div
             id="sidebarOverlay"
             class="sidebar-overlay">
@@ -501,25 +469,26 @@ if ($stmtMensajesNoLeidos) {
 
 
         <!-- =====================================================
-            CONTENIDO
-        ====================================================== -->
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
 
-        <main id="content" class="admin-content">
+        <main class="admin-content">
 
 
             <!-- =================================================
-                TOPBAR
-            ================================================== -->
+             TOPBAR
+        ================================================== -->
 
             <header class="admin-topbar">
 
                 <div class="topbar-left">
 
                     <button
-                        type="button"
                         id="toggleSidebar"
+                        type="button"
                         class="sidebar-toggle"
-                        aria-label="Abrir menú">
+                        aria-label="Abrir menú"
+                        aria-expanded="false">
 
                         <i class="fa-solid fa-bars"></i>
 
@@ -529,7 +498,7 @@ if ($stmtMensajesNoLeidos) {
                     <div class="topbar-title">
 
                         <span>
-                            Panel administrativo
+                            Administración
                         </span>
 
                         <strong>
@@ -543,8 +512,7 @@ if ($stmtMensajesNoLeidos) {
 
                 <div class="topbar-right">
 
-                    <!-- Notificaciones -->
-
+                    <!-- NOTIFICACIONES -->
                     <a
                         href="adm_mensajes.php"
                         class="topbar-icon"
@@ -552,10 +520,10 @@ if ($stmtMensajesNoLeidos) {
 
                         <i class="fa-regular fa-bell"></i>
 
-                        <?php if (!empty($totalContacto)): ?>
+                        <?php if (!empty($totalMensajes)): ?>
 
                             <span class="notification-dot">
-                                <?= number_format($totalContacto) ?>
+                                <?= (int)$totalMensajes ?>
                             </span>
 
                         <?php endif; ?>
@@ -563,15 +531,14 @@ if ($stmtMensajesNoLeidos) {
                     </a>
 
 
-                    <!-- Perfil -->
-
+                    <!-- PERFIL -->
                     <a
                         href="adm_perfil.php"
                         class="topbar-profile">
 
                         <div class="topbar-avatar">
 
-                            <?php if (!empty($fotoPerfil)): ?>
+                            <?php if ($fotoPerfil): ?>
 
                                 <img
                                     src="<?= htmlspecialchars($fotoPerfil) ?>"
@@ -586,10 +553,10 @@ if ($stmtMensajesNoLeidos) {
                         </div>
 
 
-                        <div class="topbar-user d-none d-md-flex">
+                        <div class="topbar-user">
 
                             <strong>
-                                <?= htmlspecialchars($usuario['nombreEmpresa'] ?? 'Administrador') ?>
+                                <?= htmlspecialchars($nombreEmpresa) ?>
                             </strong>
 
                             <span>
@@ -599,13 +566,19 @@ if ($stmtMensajesNoLeidos) {
                         </div>
 
 
-                        <i class="fa-solid fa-chevron-down profile-arrow d-none d-md-block"></i>
+                        <i class="fa-solid fa-chevron-down profile-arrow"></i>
 
                     </a>
 
                 </div>
 
             </header>
+
+
+            <!-- =================================================
+             CONTENIDO
+        ================================================== -->
+
             <div class="dashboard-content">
 
 
@@ -1165,6 +1138,7 @@ if ($stmtMensajesNoLeidos) {
                 </footer>
 
             </div>
+
         </main>
 
     </div>
