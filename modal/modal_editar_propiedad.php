@@ -12,195 +12,691 @@
     </script>";
     }
     ?>
+<!-- =========================================================
+     MODAL EDITAR PROPIEDAD
+========================================================= -->
 
-    <!-- Toda esta parte es modal/modal_editar_propiedad.php -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="POST" enctype="multipart/form-data">
-                    <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white">Editar Propiedad</h5>
-                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+<div
+    class="modal fade"
+    id="modalEditar"
+    tabindex="-1"
+    aria-labelledby="modalEditarLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <form
+                method="POST"
+                enctype="multipart/form-data">
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="modal-header bg-success">
+
+                    <h5
+                        class="modal-title text-white"
+                        id="modalEditarLabel">
+
+                        <i class="fa-solid fa-pen-to-square me-2"></i>
+
+                        Editar Propiedad
+
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar">
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     BODY
+                ================================================== -->
+
+                <div class="modal-body">
+
+                    <!-- ALERTA -->
+
+                    <div
+                        id="alertaPropiedad"
+                        class="alert d-none"
+                        role="alert">
                     </div>
 
-                    <div class="modal-body">
-                        <div id="alertaPropiedad" class="alert d-none mt-3"></div>
 
-                        <input type="hidden" name="accion" value="editar">
-                        <input type="hidden" name="id_propiedad" id="edit-id">
-                        <!--Imagen-->
-                        <div class="mb-2">
-                            <div class="card border-0 shadow-sm">
-                                <!-- Input -->
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-image"></i>
-                                    </span>
-                                    <input
-                                        type="file"
-                                        name="imagen"
-                                        id="edit-imagen"
-                                        class="form-control"
-                                        accept="image/png, image/jpeg">
-                                </div>
+                    <!-- CAMPOS OCULTOS -->
 
-                                <div class="form-text">
-                                    Formatos permitidos: JPG, PNG · Tamaño máximo: 1.8 MB
-                                </div>
-                                <div class="card-body p-2">
-                                    <!-- Vista previa -->
-                                    <div id="previewImagen" class="mt-0 d-none">
-                                        <div class="row align-items-center g-3">
+                    <input
+                        type="hidden"
+                        name="accion"
+                        value="editar">
 
-                                            <!-- Imagen -->
-                                            <div class="col-auto">
-                                                <div class="border rounded p-2 bg-light">
-                                                    <img
-                                                        id="previewImg"
-                                                        class="img-fluid rounded"
-                                                        style="width: 70px; height: 60px; object-fit: cover;">
-                                                </div>
-                                            </div>
+                    <input
+                        type="hidden"
+                        name="id_propiedad"
+                        id="edit-id">
 
-                                            <!-- Detalles -->
-                                            <div class="col">
-                                                <ul class="list-group list-group-flush small">
-                                                    <!--<li class="list-group-item px-0">
-                                                        <i class="bi bi-file-earmark-text text-success me-2"></i>
-                                                        <strong>Nombre:</strong>
-                                                        <span id="imgNombre"></span>
-                                                    </li>-->
-                                                    <li class="list-group-item px-0">
-                                                        <i class="bi bi-aspect-ratio text-info me-2"></i>
-                                                        <strong>Tipo:</strong>
-                                                        <span id="imgTipo"></span>
-                                                    </li>
-                                                    <li class="list-group-item px-0">
-                                                        <i class="bi bi-hdd text-warning me-2"></i>
-                                                        <strong>Tamaño:</strong>
-                                                        <span id="imgSize"></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
+
+                    <!-- =================================================
+                         NOMBRE / CÓDIGO
+                    ================================================== -->
+
+                    <div class="row g-3 mb-3">
+
+                        <!-- Nombre -->
+
+                        <div class="col-md-8">
+
+                            <label
+                                for="edit-nombre"
+                                class="form-label">
+
+                                Nombre de la propiedad
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span
+                                    class="input-group-text bg-success text-white">
+
+                                    <i class="bi bi-house-fill"></i>
+
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="nombre"
+                                    id="edit-nombre"
+                                    class="form-control"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Código -->
+
+                        <div class="col-md-4">
+
+                            <label
+                                for="edit-codigo"
+                                class="form-label">
+
+                                Código
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span
+                                    class="input-group-text bg-success text-white">
+
+                                    <i class="bi bi-upc-scan"></i>
+
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="codigo"
+                                    id="edit-codigo"
+                                    class="form-control"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         ÁREA / CATEGORÍA
+                    ================================================== -->
+
+                    <div class="row g-3 mb-3">
+
+                        <!-- Área -->
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="edit-tamano-area-metros"
+                                class="form-label">
+
+                                Tamaño del área
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span
+                                    class="input-group-text bg-success text-white">
+
+                                    <i class="bi bi-arrows-fullscreen"></i>
+
+                                </span>
+
+                                <input
+                                    type="number"
+                                    step="any"
+                                    min="0"
+                                    name="tamano_area"
+                                    id="edit-tamano-area-metros"
+                                    class="form-control"
+                                    required>
+
+                                <span class="input-group-text">
+                                    m²
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Categoría -->
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="edit-categoria"
+                                class="form-label">
+
+                                Categoría
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span
+                                    class="input-group-text bg-success text-white">
+
+                                    <i class="fas fa-th-large"></i>
+
+                                </span>
+
+                                <select
+                                    name="categoria"
+                                    id="edit-categoria"
+                                    class="form-select"
+                                    required>
+
+                                    <option value="">
+                                        Seleccione categoría
+                                    </option>
+
+                                    <?php
+
+                                    $resultadoCatego = $conexion->query("
+                                        SELECT
+                                            id_categoria,
+                                            nombre
+                                        FROM categoria
+                                        WHERE Eliminado = 0
+                                          AND id_user = " . intval($_SESSION['usId']) . "
+                                        ORDER BY nombre ASC
+                                    ");
+
+                                    if ($resultadoCatego):
+
+                                        while ($cate = $resultadoCatego->fetch_assoc()):
+
+                                    ?>
+
+                                        <option
+                                            value="<?= (int) $cate['id_categoria'] ?>">
+
+                                            <?= htmlspecialchars(
+                                                $cate['nombre'],
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            ) ?>
+
+                                        </option>
+
+                                    <?php
+
+                                        endwhile;
+
+                                    endif;
+
+                                    ?>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         PRECIO ANTERIOR / PRECIO ACTUAL
+                    ================================================== -->
+
+                    <div class="row g-3 mb-3">
+
+                        <!-- Precio anterior -->
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="edit-precio-anterior"
+                                class="form-label">
+
+                                Precio anterior
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span
+                                    class="input-group-text bg-secondary text-white">
+
+                                    <i class="bi bi-tag"></i>
+
+                                </span>
+
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    name="precio_anterior"
+                                    id="edit-precio-anterior"
+                                    class="form-control"
+                                    placeholder="0.00">
+
+                            </div>
+
+                            <small class="text-muted">
+                                Precio anterior de la propiedad.
+                            </small>
+
+                        </div>
+
+
+                        <!-- Precio actual -->
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="edit-precio"
+                                class="form-label">
+
+                                Precio de venta
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span
+                                    class="input-group-text bg-success text-white">
+
+                                    <i class="bi bi-currency-dollar"></i>
+
+                                </span>
+
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    name="precio"
+                                    id="edit-precio"
+                                    class="form-control"
+                                    required
+                                    placeholder="0.00">
+
+                            </div>
+
+                            <small class="text-muted">
+                                Precio actual de venta.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         UBICACIÓN
+                    ================================================== -->
+
+                    <div class="mb-3">
+
+                        <label
+                            for="edit-ubicacion"
+                            class="form-label">
+
+                            Ubicación / Zona
+
+                        </label>
+
+                        <div class="input-group">
+
+                            <span
+                                class="input-group-text bg-success text-white">
+
+                                <i class="bi bi-geo-alt-fill"></i>
+
+                            </span>
+
+                            <input
+                                type="text"
+                                id="edit-ubicacion"
+                                name="ubicacion"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         INFORMACIÓN DE FECHAS
+                    ================================================== -->
+
+                    <div class="card border-0 bg-light mt-4">
+
+                        <div class="card-body py-3">
+
+                            <div class="row g-3">
+
+                                <!-- Fecha de registro -->
+
+                                <div class="col-md-6">
+
+                                    <div class="d-flex align-items-center">
+
+                                        <div
+                                            class="rounded-circle bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center me-3"
+                                            style="width: 42px; height: 42px;">
+
+                                            <i class="fa-solid fa-calendar-plus"></i>
 
                                         </div>
+
+                                        <div>
+
+                                            <small
+                                                class="text-muted d-block">
+
+                                                Fecha de registro
+
+                                            </small>
+
+                                            <strong
+                                                id="edit-fecha-registro"
+                                                class="text-dark">
+
+                                                —
+
+                                            </strong>
+
+                                        </div>
+
                                     </div>
 
                                 </div>
-                            </div>
-                        </div>
-                        <!--Nombre y documento-->
-                        <div class="row g-2 mb-3">
-                            <div class="col">
-                                <label class="form-label">Nombre</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-house-fill"></i>
-                                    </span>
-                                    <input type="text" name="nombre" id="edit-nombre" class="form-control" required>
+
+
+                                <!-- Fecha de actualización -->
+
+                                <div class="col-md-6">
+
+                                    <div class="d-flex align-items-center">
+
+                                        <div
+                                            class="rounded-circle bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center me-3"
+                                            style="width: 42px; height: 42px;">
+
+                                            <i class="fa-solid fa-calendar-check"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <small
+                                                class="text-muted d-block">
+
+                                                Última actualización
+
+                                            </small>
+
+                                            <strong
+                                                id="edit-fecha-actualizacion"
+                                                class="text-dark">
+
+                                                —
+
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
+
                             </div>
-                            <div class="col">
-                                <label class="form-label">Codigo</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-upc-scan"></i>
-                                    </span>
-                                    <input type="text" name="codigo" id="edit-codigo" class="form-control" required>
-                                </div>
-                            </div>
+
                         </div>
 
-                        <div class="row g-2 mb-3">
-                            <div class="col">
-                                <label class="form-label">Tamaño del area</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-arrows-fullscreen"></i>
-                                    </span>
-                                    <input
-                                        type="number"
-                                        step="any"
-                                        min="0"
-                                        name="tamano_area"
-                                        id="edit-tamano-area-metros"
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Precio a vender</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-currency-dollar"></i>
-                                    </span>
-                                    <input type="number" step="any" min="0" name="precio" id="edit-precio" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- opciones de rubro + opciones de departamento -->
-                        <div class="row g-2 mb-3">
-                            <div class="col">
-                                <label class="form-label">Categoria</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white"> <i class="fas fa-th-large"></i></span>
-                                    <!--<input type="text" name="rubro" class="form-control" id="edit-rubro">-->
-                                    <!--poner un select mostrando el rubro seleccionado y luego mostrar los rubros de la base de datos-->
-                                    <select name="categoria" id="edit-categoria" class="form-select" required>
-                                        <option value="">Seleccione categoría</option>
-                                        <?php
-                                        $resultadoCatego = $conexion->query("SELECT id_categoria, nombre, id_user FROM categoria where Eliminado = 0 AND id_user=" . intval($_SESSION['usId']) . " ");
-                                        while ($cate = $resultadoCatego->fetch_assoc()) {
-                                            echo '<option value="' . $cate['id_categoria'] . '">'
-                                                . htmlspecialchars($cate['nombre']) .
-                                                '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Ubicación / Zona</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-geo-alt-fill"></i>
-                                    </span>
-                                    <input type="text" id="edit-ubicacion" name="ubicacion" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        <!--<a type="submit" class="btn btn-primary" id="btnGuardarCambios">Guardar cambios</a>-->
-                    </div>
-                </form>
-                <?php if (!empty($mensaje)): ?>
-                    <div class="alert alert-<?php echo $tipoAlerta; ?> mt-3">
-                        <?php echo $mensaje; ?>
-                    </div>
-                <?php endif; ?>
-                <div id="mensajeActualizacion" class="mt-2"></div>
+                </div>
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        <i class="fa-solid fa-xmark me-1"></i>
+
+                        Cancelar
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        <i class="fa-solid fa-floppy-disk me-1"></i>
+
+                        Guardar cambios
+
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <?php if (!empty($mensaje)): ?>
+
+                <div
+                    class="alert alert-<?= htmlspecialchars(
+                        $tipoAlerta,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?> mx-3 mb-3">
+
+                    <?= htmlspecialchars(
+                        $mensaje,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+
+                </div>
+
+            <?php endif; ?>
+
+
+            <div
+                id="mensajeActualizacion"
+                class="mt-2">
             </div>
+
         </div>
+
     </div>
 
+</div>
+
     <!-- Modal de confirmación de eliminar -->
-    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+    <!-- =========================================================
+     MODAL ELIMINAR PROPIEDAD
+========================================================= -->
+
+    <div
+        class="modal fade"
+        id="modalEliminar"
+        tabindex="-1"
+        aria-labelledby="modalEliminarLabel"
+        aria-hidden="true">
+
         <div class="modal-dialog modal-dialog-centered">
+
             <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title" id="modalEliminarLabel">Confirmar eliminación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que deseas eliminar este propiedad?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <a href="#" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</a>
-                </div>
+
+                <form
+                    method="POST"
+                    action="../controladores/eliminar_propiedad.php"
+                    id="formEliminarPropiedad">
+
+                    <!-- HEADER -->
+
+                    <div class="modal-header bg-danger text-white">
+
+                        <h5
+                            class="modal-title"
+                            id="modalEliminarLabel">
+
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+
+                            Confirmar eliminación
+
+                        </h5>
+
+                        <button
+                            type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"
+                            aria-label="Cerrar">
+                        </button>
+
+                    </div>
+
+
+                    <!-- BODY -->
+
+                    <div class="modal-body">
+
+                        <input
+                            type="hidden"
+                            name="accion"
+                            value="eliminar">
+
+                        <input
+                            type="hidden"
+                            name="id_propiedad"
+                            id="eliminar-id"
+                            value="">
+
+
+                        <div class="text-center mb-3">
+
+                            <div
+                                class="mx-auto d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10"
+                                style="width: 70px; height: 70px;">
+
+                                <i
+                                    class="fa-solid fa-trash-can text-danger"
+                                    style="font-size: 30px;">
+                                </i>
+
+                            </div>
+
+                        </div>
+
+
+                        <p class="text-center mb-2">
+
+                            ¿Estás seguro de que deseas eliminar esta propiedad?
+
+                        </p>
+
+
+                        <div
+                            class="alert alert-warning text-center mb-0">
+
+                            <i class="fa-solid fa-building me-2"></i>
+
+                            <strong id="eliminar-nombre">
+                                Propiedad
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                La propiedad dejará de aparecer en el listado.
+                            </small>
+
+                        </div>
+                    </div>
+
+
+                    <!-- FOOTER -->
+
+                    <div class="modal-footer">
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+
+                            <i class="fa-solid fa-xmark me-1"></i>
+
+                            Cancelar
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger"
+                            id="btnConfirmarEliminar">
+
+                            <i class="fa-solid fa-trash me-1"></i>
+
+                            Eliminar propiedad
+
+                        </button>
+
+                    </div>
+
+                </form>
+
             </div>
+
         </div>
+
     </div>

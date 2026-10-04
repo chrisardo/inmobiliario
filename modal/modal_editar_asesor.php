@@ -1,187 +1,652 @@
-    <?php
-    if (!empty($mensaje)) {
-        echo "<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const modal = new bootstrap.Modal(document.getElementById('modalEditar'));
-            modal.show();
-            const alert = document.getElementById('alertaAsesor');
-            alert.classList.remove('d-none');
-            alert.classList.add('alert-danger');
-            alert.innerHTML = " . json_encode($mensaje) . ";
-        });
-    </script>";
-    }
-    ?>
+<?php
+// =========================================================
+// CoDevPro Technology
+// Archivo: modal/modal_editar_asesor.php
+// Módulo: Editar Asesor
+// Sistema: Inmobiliario
+// =========================================================
 
-    <!-- Toda esta parte es modal/modal_editar_propiedad.php -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="POST" enctype="multipart/form-data">
-                    <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white">Editar Asesor</h5>
-                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/* =========================================================
+   CSRF
+========================================================= */
+
+if (empty($_SESSION['csrf_asesores'])) {
+
+    try {
+
+        $_SESSION['csrf_asesores'] =
+            bin2hex(random_bytes(32));
+    } catch (Throwable $e) {
+
+        $_SESSION['csrf_asesores'] =
+            hash(
+                'sha256',
+                uniqid((string) mt_rand(), true)
+            );
+    }
+}
+
+$csrfAsesores =
+    $_SESSION['csrf_asesores'];
+
+?>
+
+<!-- =====================================================
+     MODAL EDITAR ASESOR
+====================================================== -->
+
+<div
+    class="modal fade"
+    id="modalEditar"
+    tabindex="-1"
+    aria-labelledby="modalEditarLabel"
+    aria-hidden="true">
+
+    <div
+        class="modal-dialog modal-dialog-centered modal-lg">
+
+        <div class="modal-content modal-asesor-content">
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="modal-header modal-asesor-header">
+
+                <div class="modal-title-wrapper">
+
+                    <div class="modal-asesor-icon">
+
+                        <i class="fa-solid fa-user-pen"></i>
+
                     </div>
 
-                    <div class="modal-body">
-                        <div id="alertaAsesor" class="alert d-none mt-3"></div>
+                    <div>
 
-                        <input type="hidden" name="accion" value="editar">
-                        <input type="hidden" name="id_asesor" id="edit-id">
-                        <!--Imagen-->
-                        <div class="mb-2">
-                            <div class="card border-0 shadow-sm">
-                                <!-- Input -->
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-image"></i>
+                        <span class="modal-asesor-eyebrow">
+                            GESTIÓN COMERCIAL
+                        </span>
+
+                        <h5
+                            class="modal-title"
+                            id="modalEditarLabel">
+
+                            Editar asesor
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Cerrar">
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 BODY
+            ================================================== -->
+
+            <div class="modal-body">
+
+                <!-- =================================================
+                     ALERTA
+                ================================================== -->
+
+                <div
+                    id="alertaAsesor"
+                    class="alert d-none"
+                    role="alert">
+                </div>
+
+
+                <!-- =================================================
+                     FORMULARIO
+                ================================================== -->
+
+                <form
+                    action="../controladores/editar_asesor.php"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    autocomplete="off"
+                    novalidate>
+
+                    <!-- =================================================
+                         SEGURIDAD
+                    ================================================== -->
+
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="<?= htmlspecialchars(
+                                    $csrfAsesores,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>">
+
+                    <input
+                        type="hidden"
+                        name="accion"
+                        value="editar">
+
+                    <input
+                        type="hidden"
+                        name="id_asesor"
+                        id="edit-id"
+                        value="">
+
+
+                    <!-- =================================================
+                         INFORMACIÓN PERSONAL
+                    ================================================== -->
+
+                    <div class="modal-form-section">
+
+                        <div class="modal-form-section-title">
+
+                            <span class="section-icon">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Información personal
+                                </strong>
+
+                                <small>
+                                    Datos principales del asesor
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <!-- =================================================
+                                 NOMBRE
+                            ================================================== -->
+
+                            <div class="col-12 col-md-6">
+
+                                <label
+                                    for="edit-nombre"
+                                    class="form-label">
+
+                                    Nombre
+
+                                    <span class="text-danger">
+                                        *
                                     </span>
+
+                                </label>
+
+                                <div class="input-group asesor-input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="fa-solid fa-user"></i>
+
+                                    </span>
+
                                     <input
-                                        type="file"
-                                        name="imagen"
-                                        id="edit-imagen"
+                                        type="text"
                                         class="form-control"
-                                        accept="image/png, image/jpeg">
+                                        id="edit-nombre"
+                                        name="nombre"
+                                        maxlength="100"
+                                        required
+                                        placeholder="Ingrese el nombre">
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- =================================================
+                                 APELLIDOS
+                            ================================================== -->
+
+                            <div class="col-12 col-md-6">
+
+                                <label
+                                    for="edit-apellidos"
+                                    class="form-label">
+
+                                    Apellidos
+
+                                    <span class="text-danger">
+                                        *
+                                    </span>
+
+                                </label>
+
+                                <div class="input-group asesor-input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="fa-solid fa-users"></i>
+
+                                    </span>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="edit-apellidos"
+                                        name="apellidos"
+                                        maxlength="150"
+                                        required
+                                        placeholder="Ingrese los apellidos">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         CONTACTO
+                    ================================================== -->
+
+                    <div class="modal-form-section">
+
+                        <div class="modal-form-section-title">
+
+                            <span class="section-icon">
+
+                                <i class="fa-solid fa-address-book"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Información de contacto
+                                </strong>
+
+                                <small>
+                                    Medios de comunicación del asesor
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <!-- =================================================
+                                 EMAIL
+                            ================================================== -->
+
+                            <div class="col-12 col-md-6">
+
+                                <label
+                                    for="edit-email"
+                                    class="form-label">
+
+                                    Correo electrónico
+
+                                    <span class="text-danger">
+                                        *
+                                    </span>
+
+                                </label>
+
+                                <div class="input-group asesor-input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="fa-solid fa-envelope"></i>
+
+                                    </span>
+
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="edit-email"
+                                        name="email"
+                                        maxlength="150"
+                                        required
+                                        placeholder="correo@ejemplo.com">
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- =================================================
+                                 CELULAR
+                            ================================================== -->
+
+                            <div class="col-12 col-md-6">
+
+                                <label
+                                    for="edit-celular"
+                                    class="form-label">
+
+                                    Celular
+
+                                    <span class="text-danger">
+                                        *
+                                    </span>
+
+                                </label>
+
+                                <div class="input-group asesor-input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="fa-solid fa-phone"></i>
+
+                                    </span>
+
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        id="edit-celular"
+                                        name="celular"
+                                        maxlength="20"
+                                        required
+                                        placeholder="999 999 999">
+
                                 </div>
 
                                 <div class="form-text">
-                                    Formatos permitidos: JPG, PNG · Tamaño máximo: 1.8 MB
+                                    Puedes utilizar números, +, espacios,
+                                    paréntesis y guiones.
                                 </div>
-                                <div class="card-body p-2">
-                                    <!-- Vista previa -->
-                                    <div id="previewImagen" class="mt-0 d-none">
-                                        <div class="row align-items-center g-3">
 
-                                            <!-- Imagen -->
-                                            <div class="col-auto">
-                                                <div class="border rounded p-2 bg-light">
-                                                    <img
-                                                        id="previewImg"
-                                                        class="img-fluid rounded"
-                                                        style="width: 70px; height: 60px; object-fit: cover;">
-                                                </div>
-                                            </div>
+                            </div>
 
-                                            <!-- Detalles -->
-                                            <div class="col">
-                                                <ul class="list-group list-group-flush small">
-                                                    <!--<li class="list-group-item px-0">
-                                                        <i class="bi bi-file-earmark-text text-success me-2"></i>
-                                                        <strong>Nombre:</strong>
-                                                        <span id="imgNombre"></span>
-                                                    </li>-->
-                                                    <li class="list-group-item px-0">
-                                                        <i class="bi bi-aspect-ratio text-info me-2"></i>
-                                                        <strong>Tipo:</strong>
-                                                        <span id="imgTipo"></span>
-                                                    </li>
-                                                    <li class="list-group-item px-0">
-                                                        <i class="bi bi-hdd text-warning me-2"></i>
-                                                        <strong>Tamaño:</strong>
-                                                        <span id="imgSize"></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                        </div>
 
-                                        </div>
+                    </div>
+
+
+                    <!-- =================================================
+                         CARGO
+                    ================================================== -->
+
+                    <div class="modal-form-section">
+
+                        <div class="modal-form-section-title">
+
+                            <span class="section-icon">
+
+                                <i class="fa-solid fa-briefcase"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Información laboral
+                                </strong>
+
+                                <small>
+                                    Cargo dentro del equipo comercial
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <div class="col-12">
+
+                                <label
+                                    for="edit-cargo"
+                                    class="form-label">
+
+                                    Cargo
+
+                                    <span class="text-danger">
+                                        *
+                                    </span>
+
+                                </label>
+
+                                <div class="input-group asesor-input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="fa-solid fa-id-badge"></i>
+
+                                    </span>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="edit-cargo"
+                                        name="cargo"
+                                        maxlength="100"
+                                        required
+                                        placeholder="Ej. Asesor inmobiliario">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         IMAGEN
+                    ================================================== -->
+
+                    <div class="modal-form-section">
+
+                        <div class="modal-form-section-title">
+
+                            <span class="section-icon">
+
+                                <i class="fa-solid fa-image"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Foto del asesor
+                                </strong>
+
+                                <small>
+                                    Selecciona una nueva imagen
+                                    únicamente si deseas reemplazarla
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="asesor-image-upload">
+
+                            <label
+                                for="edit-imagen"
+                                class="asesor-image-label">
+
+                                <div class="asesor-image-upload-icon">
+
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                                </div>
+
+                                <div class="asesor-image-upload-text">
+
+                                    <strong>
+                                        Seleccionar nueva imagen
+                                    </strong>
+
+                                    <span>
+                                        JPG, JPEG, PNG o WEBP
+                                    </span>
+
+                                    <small>
+                                        Tamaño máximo: 2.7 MB
+                                    </small>
+
+                                </div>
+
+                            </label>
+
+
+                            <input
+                                type="file"
+                                id="edit-imagen"
+                                name="imagen"
+                                class="d-none"
+                                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+
+
+                            <!-- =================================================
+                                 PREVIEW
+                            ================================================== -->
+
+                            <div
+                                id="previewImagen"
+                                class="asesor-image-preview d-none">
+
+                                <div class="preview-image-wrapper">
+
+                                    <img
+                                        id="previewImg"
+                                        src=""
+                                        alt="Vista previa">
+
+                                </div>
+
+
+                                <div class="preview-image-info">
+
+                                    <strong>
+                                        Vista previa
+                                    </strong>
+
+                                    <div class="preview-data">
+
+                                        <span>
+
+                                            <i class="fa-solid fa-file-image"></i>
+
+                                            <span id="imgNombre"></span>
+
+                                        </span>
+
+                                        <span>
+
+                                            <i class="fa-solid fa-weight-hanging"></i>
+
+                                            <span id="imgSize"></span>
+
+                                        </span>
+
+                                        <span>
+
+                                            <i class="fa-solid fa-tag"></i>
+
+                                            <span id="imgTipo"></span>
+
+                                        </span>
+
                                     </div>
 
                                 </div>
+
                             </div>
-                        </div>
-                        <!--Nombre y documento-->
-                        <div class="row g-2 mb-3">
-                            <div class="col">
-                                <label class="form-label">Nombre</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-person-fill"></i>
-                                    </span>
-                                    <input type="text" name="nombre" id="edit-nombre" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Apellidos</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-person-badge-fill"></i>
-                                    </span>
-                                    <input type="text" name="apellidos" id="edit-apellidos" class="form-control" required>
-                                </div>
-                            </div>
+
                         </div>
 
-                        <div class="row g-2 mb-3">
-                            <div class="col">
-                                <label class="form-label">Celular</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-phone-fill"></i>
-                                    </span>
-                                    <input
-                                        type="number"
-                                        step="any"
-                                        min="0"
-                                        name="celular"
-                                        id="edit-celular"
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Email coorporativo</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-envelope-fill"></i>
-                                    </span>
-                                    <input type="email" id="edit-email" name="email" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- opciones de rubro + opciones de departamento -->
-                        <div class="row g-2 mb-3">
-                            <div class="col">
-                                <label class="form-label">Cargo</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success text-white">
-                                        <i class="bi bi-briefcase-fill"></i>
-                                    </span>
-                                    <input type="text" id="edit-cargo" name="cargo" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary"> <i class="bi bi-save me-1"></i>Guardar cambios</button>
-                        <!--<a type="submit" class="btn btn-primary" id="btnGuardarCambios">Guardar cambios</a>-->
+
+                    <!-- =================================================
+                         NOTA
+                    ================================================== -->
+
+                    <div class="asesor-edit-note">
+
+                        <div class="asesor-edit-note-icon">
+
+                            <i class="fa-solid fa-circle-info"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Sobre la fotografía
+                            </strong>
+
+                            <p>
+                                Si no seleccionas una nueva imagen,
+                                se conservará la fotografía actual
+                                del asesor.
+                            </p>
+
+                        </div>
+
                     </div>
+
+
+                    <!-- =================================================
+                         FOOTER
+                    ================================================== -->
+
+                    <div class="modal-footer modal-asesor-footer">
+
+                        <button
+                            type="button"
+                            class="btn btn-light asesor-btn-cancel"
+                            data-bs-dismiss="modal">
+
+                            <i class="fa-solid fa-xmark me-2"></i>
+
+                            Cancelar
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-success asesor-btn-save">
+
+                            <i class="fa-solid fa-floppy-disk me-2"></i>
+
+                            Guardar cambios
+
+                        </button>
+
+                    </div>
+
                 </form>
-                <?php if (!empty($mensaje)): ?>
-                    <div class="alert alert-<?php echo $tipoAlerta; ?> mt-3">
-                        <?php echo $mensaje; ?>
-                    </div>
-                <?php endif; ?>
-                <div id="mensajeActualizacion" class="mt-2"></div>
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- Modal de confirmación de eliminar -->
-    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title" id="modalEliminarLabel">Confirmar eliminación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que deseas eliminar este propiedad?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <a href="#" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</a>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>

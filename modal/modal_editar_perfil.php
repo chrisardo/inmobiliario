@@ -1,4 +1,4 @@
-<!-- Modal Editar Perfil -->
+<!-- modal: modal_editar_perfil.php -->
 <div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

@@ -1,123 +1,307 @@
-<!-- Modal de confirmación de eliminar -->
-<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="modalEliminarLabel">Confirmar eliminación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                ¿Estás seguro de que deseas eliminar?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <a href="#" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal Ver Detalles del Mensaje -->
-<div class="modal fade" id="modalVerDetalles" tabindex="-1" aria-hidden="true">
+<!-- =========================================================
+     MODAL VER DETALLES DEL MENSAJE
+========================================================= -->
+
+<div class="modal fade"
+    id="modalVerDetalles"
+    tabindex="-1"
+    aria-labelledby="modalVerDetallesLabel"
+    aria-hidden="true">
+
+
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content shadow-lg border-0">
 
-            <!-- Header -->
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title d-flex align-items-center gap-2">
-                    <i class="fas fa-envelope-open-text"></i>
-                    Detalle del Mensaje
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
+        <div class="modal-content message-modal">
 
-            <!-- Body -->
-            <div class="modal-body">
+            <!-- =================================================
+             HEADER
+        ================================================== -->
 
-                <!-- Datos del Cliente -->
-                <div class="card mb-3 border-0 shadow-sm">
-                    <div class="card-header bg-light fw-bold">
-                        <i class="fas fa-user me-2 text-success"></i>
-                        Datos del Cliente
+            <div class="modal-header message-modal-header">
+
+                <div class="message-modal-title">
+
+                    <div class="message-modal-icon">
+                        <i class="fa-solid fa-envelope-open-text"></i>
                     </div>
-                    <div class="card-body row g-3">
 
-                        <div class="col-md-6">
-                            <i class="fas fa-id-card text-success me-2"></i>
-                            <strong>Nombre:</strong>
-                            <div id="verNombre" class="text-muted"></div>
-                        </div>
+                    <div>
+                        <span class="message-modal-eyebrow">
+                            GESTIÓN DE MENSAJES
+                        </span>
 
-                        <div class="col-md-6">
-                            <i class="fas fa-id-card-clip text-success me-2"></i>
-                            <strong>Apellidos:</strong>
-                            <div id="verApellidos" class="text-muted"></div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <i class="fas fa-envelope text-success me-2"></i>
-                            <strong>Email:</strong>
-                            <div id="verEmail" class="text-muted"></div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <i class="fas fa-phone text-success me-2"></i>
-                            <strong>Celular:</strong>
-                            <div id="verCelular" class="text-muted"></div>
-                        </div>
-
+                        <h5 class="modal-title" id="modalVerDetallesLabel">
+                            Detalle del Mensaje
+                        </h5>
                     </div>
+
                 </div>
 
-                <!-- Datos del Mensaje -->
-                <div class="card mb-3 border-0 shadow-sm">
-                    <div class="card-header bg-light fw-bold">
-                        <i class="fas fa-message me-2 text-success"></i>
-                        Información del Mensaje
-                    </div>
-
-                    <div class="card-body row g-3">
-                        <div class="col-md-6">
-                            <i class="fas fa-house text-success me-2"></i>
-                            <strong>Propiedad:</strong>
-                            <div id="verPropiedad" class="text-muted"></div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <i class="fas fa-calendar text-success me-2"></i>
-                            <strong>Fecha:</strong>
-                            <div id="verFecha" class="text-muted"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mensaje -->
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-success text-white fw-bold">
-                        <i class="fas fa-comment-dots me-2"></i>
-                        Mensaje del Cliente
-                    </div>
-                    <div class="card-body bg-light rounded">
-                        <p id="verMensaje" class="mb-0" style="white-space: pre-line;"></p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Footer -->
-            <div class="modal-footer bg-light">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times me-1"></i> Cerrar
+                <button type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Cerrar">
                 </button>
-                <a
-                    href="#"
-                    target="_blank"
-                    id="btnWhatsapp"
-                    class="btn btn-success">
-                    <i class="fab fa-whatsapp me-1"></i>
-                    Responder por WhatsApp
+
+            </div>
+
+
+            <!-- =================================================
+             BODY
+        ================================================== -->
+
+            <div class="modal-body message-modal-body">
+
+
+                <!-- =================================================
+                 DATOS DEL CLIENTE
+            ================================================== -->
+
+                <section class="message-detail-card">
+
+                    <div class="message-detail-header">
+
+                        <div class="message-section-icon client">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+                            <span class="message-section-label">
+                                INFORMACIÓN
+                            </span>
+
+                            <h6>
+                                Datos del Cliente
+                            </h6>
+                        </div>
+
+                    </div>
+
+
+                    <div class="message-detail-grid">
+
+                        <div class="message-detail-item">
+
+                            <span class="message-detail-label">
+                                <i class="fa-solid fa-user"></i>
+                                Nombre
+                            </span>
+
+                            <strong id="verNombre">
+                                No especificado
+                            </strong>
+
+                        </div>
+
+
+                        <div class="message-detail-item">
+
+                            <span class="message-detail-label">
+                                <i class="fa-solid fa-id-card"></i>
+                                Apellidos
+                            </span>
+
+                            <strong id="verApellidos">
+                                No especificados
+                            </strong>
+
+                        </div>
+
+
+                        <div class="message-detail-item">
+
+                            <span class="message-detail-label">
+                                <i class="fa-solid fa-envelope"></i>
+                                Correo electrónico
+                            </span>
+
+                            <strong id="verEmail">
+                                No especificado
+                            </strong>
+
+                        </div>
+
+
+                        <div class="message-detail-item">
+
+                            <span class="message-detail-label">
+                                <i class="fa-solid fa-phone"></i>
+                                Celular
+                            </span>
+
+                            <strong id="verCelular">
+                                No especificado
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                 INFORMACIÓN DEL MENSAJE
+            ================================================== -->
+
+                <section class="message-detail-card">
+
+                    <div class="message-detail-header">
+
+                        <div class="message-section-icon property">
+                            <i class="fa-solid fa-message"></i>
+                        </div>
+
+                        <div>
+                            <span class="message-section-label">
+                                SEGUIMIENTO
+                            </span>
+
+                            <h6>
+                                Información del Mensaje
+                            </h6>
+                        </div>
+
+                    </div>
+
+
+                    <div class="message-detail-grid">
+
+
+                        <!-- PROPIEDAD -->
+
+                        <div class="message-detail-item">
+
+                            <span class="message-detail-label">
+                                <i class="fa-solid fa-house"></i>
+                                Propiedad
+                            </span>
+
+                            <strong id="verPropiedad">
+                                No especificada
+                            </strong>
+
+                        </div>
+
+
+                        <!-- FECHA RECIBIDO -->
+
+                        <div class="message-detail-item">
+
+                            <span class="message-detail-label">
+                                <i class="fa-solid fa-calendar-plus"></i>
+                                Fecha recibido
+                            </span>
+
+                            <strong id="verFecha">
+                                No especificada
+                            </strong>
+
+                        </div>
+
+                        <!-- FECHA LEÍDO -->
+
+                        <div class="message-detail-item">
+
+                            <span class="message-detail-label">
+                                <i class="fa-solid fa-eye"></i>
+                                Fecha de lectura
+                            </span>
+
+                            <strong id="verFechaLeido"
+                                class="message-read-date">
+                                No leído
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                 MENSAJE DEL CLIENTE
+            ================================================== -->
+
+                <section class="message-content-card">
+
+                    <div class="message-content-header">
+
+                        <div class="message-content-icon">
+                            <i class="fa-solid fa-comment-dots"></i>
+                        </div>
+
+                        <div>
+                            <span>
+                                MENSAJE RECIBIDO
+                            </span>
+
+                            <h6>
+                                Mensaje del Cliente
+                            </h6>
+                        </div>
+
+                    </div>
+
+
+                    <div class="message-content-body">
+
+                        <div class="message-quote-icon">
+                            <i class="fa-solid fa-quote-left"></i>
+                        </div>
+
+                        <p id="verMensaje">
+                            El cliente no escribió un mensaje.
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+            <div class="modal-footer message-modal-footer">
+
+                <button type="button"
+                    class="btn message-btn-close"
+                    data-bs-dismiss="modal">
+
+                    <i class="fa-solid fa-xmark"></i>
+                    Cerrar
+
+                </button>
+
+
+                <a href="#"
+                    id="btnCorreo"
+                    class="btn message-btn-email">
+
+                    <i class="fa-solid fa-envelope"></i>
+                    Correo
+
                 </a>
+
+
+                <a href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id="btnWhatsapp"
+                    class="btn message-btn-whatsapp">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+                    WhatsApp
+
+                </a>
+
             </div>
 
         </div>
+
     </div>
 </div>
