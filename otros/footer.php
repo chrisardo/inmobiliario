@@ -1,150 +1,555 @@
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-5">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-4 mb-4 mb-lg-0">
-                  <h4 class="text-info mb-3"><?php echo $usuario['nombreEmpresa']; ?></h4>
-                  <p class="mb-3">
-                      <?php echo $usuario['descripcion_acerca']; ?>
-                  </p>
-                  <div class="d-flex">
-                      <a href="#" class="text-white me-3">
-                          <i class="fab fa-facebook-f fa-lg"></i>
-                      </a>
-                      <a href="#" class="text-white me-3">
-                          <i class="fab fa-twitter fa-lg"></i>
-                      </a>
-                      <a href="#" class="text-white me-3">
-                          <i class="fab fa-linkedin-in fa-lg"></i>
-                      </a>
-                      <a href="#" class="text-white">
-                          <i class="fab fa-instagram fa-lg"></i>
-                      </a>
-                  </div>
-              </div>
-              <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                  <h5 class="mb-3">Enlaces</h5>
-                  <ul class="list-unstyled">
-                      <li class="mb-2">
-                          <a href="./index.php" class="text-white text-decoration-none">Inicio</a>
-                      </li>
-                      <li class="mb-2">
-                          <a href="./nosotros.php" class="text-white text-decoration-none">Conócenos</a>
-                      </li>
-                      <li class="mb-2">
-                          <a href="./propiedades.php" class="text-white text-decoration-none">Propiedades</a>
-                      </li>
-                      <li class="mb-2">
-                          <a href="./asesores.php" class="text-white text-decoration-none">Asesores</a>
-                      </li>
-                      <li class="mb-2">
-                          <a href="./contacto.php" class="text-white text-decoration-none">Contacto</a>
-                      </li>
-                  </ul>
-              </div>
-              <div class="col-lg-3">
-                  <h5 class="mb-3">Contacto</h5>
-                  <ul class="list-unstyled">
-                      <li class="mb-2">
-                          <i class="fas fa-phone me-2"></i> (+51) <?php if (!empty($usuario['celular'])): ?>
+<!-- ==========================================================
+     FOOTER
+     CoDevPro Technology
+     Sistema: Inmobiliaria Iquitos
+     ========================================================== -->
 
-                              <a href="tel:<?= $usuario['celular'] ?>" target="_blank" class="text-white">
-                                  <?php echo $usuario['celular'];
-                                    ?>
-                              </a>
-                          <?php endif; ?>
-                      </li>
-                      <li class="mb-2">
-                          <i class="fas fa-envelope me-2"></i> <a href="mailto:<?= $usuario['email'] ?>" class="text-white">
-                              <?php echo $usuario['email']; ?>
-                          </a>
-                      </li>
-                      <li class="mb-2">
-                          <i class="fas fa-map-marker-alt me-2"></i> <?php echo $usuario['direccion']; ?>, Perú
-                      </li>
-                  </ul>
-              </div>
-              <div class="col-lg-3">
-                  <h5 class="mb-3">Horario de apertura</h5>
-                  <ul class="list-unstyled">
-                      <li class="mb-2">Lun - Vi: 8:30 am to 6:30 pm</li>
-                      <li class="mb-2">Sábado: 9:30 am to 1:00 pm</li>
-                      <li class="mb-2">Domingo: Closed</li>
-                  </ul>
-              </div>
-          </div>
-          <hr class="my-4 bg-secondary" />
-          <div class="row">
-              <div class="col-md-6">
-                  <p class="mb-0 small">
-                      &copy; Todos los derechos reservadoos 2024. Desarrollado por
-                      CoDevPro Technology.
-                  </p>
-              </div>
-              <div class="col-md-6 text-md-end">
-                  <a href="#" class="text-white text-decoration-none small me-3">Aviso Legal</a>
-                  <a href="#" class="text-white text-decoration-none small">Política de Privacidad</a>
-              </div>
-          </div>
-      </div>
+<footer class="main-footer">
 
-  </footer>
-  <!-- Floating Chat Button -->
-  <!-- Floating Chat Button -->
-  <div id="chatContainer" class="position-fixed bottom-0 end-0 p-4" style="z-index:99999">
+    <div class="container">
 
-      <div id="chatButtonContainer">
-          <button id="chatButton" class="btn btn-success btn-lg d-flex align-items-center">
-              <i class="bi bi-whatsapp fs-4 me-2"></i>
-              Chatea con nosotros
-          </button>
-      </div>
+        <div class="row g-4">
 
-      <div id="chatFormContainer" class="card d-none shadow" style="width:320px">
-          <div class="card-header bg-success text-white d-flex justify-content-between">
-              <strong>WhatsApp</strong>
-              <button type="button" id="closeChatForm" class="btn-close btn-close-white"></button>
-          </div>
+            <!-- ==================================================
+                 EMPRESA
+                 ================================================== -->
 
-          <div class="card-body">
-              <form id="chatForm">
-                  <div class="mb-2">
-                      <label class="form-label">Nombre</label>
-                      <input type="text" id="chat_nombre" class="form-control" required>
-                  </div>
+            <div class="col-lg-4 col-md-6">
 
-                  <div class="mb-2">
-                      <label class="form-label">Elige un asesor:</label>
-                      <div class="input-group">
-                          <select id="chat_asesor" class="form-select" required>
-                              <option value="" selected disabled>Selecciona un asesor</option>
+                <div class="footer-brand">
+                    <?php if ($fotoPerfil): ?>
 
-                              <?php foreach ($asesores as $asesor): ?>
-                                  <option
-                                      value="<?= htmlspecialchars($asesor['celular']) ?>"
-                                      data-nombre="<?= htmlspecialchars($asesor['nombre'] . ' ' . $asesor['apellidos']) ?>">
-                                      <?= htmlspecialchars($asesor['nombre'] . ' ' . $asesor['apellidos']) ?>
-                                      – <?= htmlspecialchars($asesor['celular']) ?>
-                                  </option>
-                              <?php endforeach; ?>
+                    <img
+                        src="<?= e($fotoPerfil); ?>"
+                        alt="Logo <?= e($nombreEmpresa); ?>"
+                        class="company-logo">
 
-                              <?php if (empty($asesores)): ?>
-                                  <option disabled>No hay asesores disponibles</option>
-                              <?php endif; ?>
-                          </select>
+                <?php else: ?>
 
-                      </div>
-                  </div>
+                    <span class="company-logo-placeholder">
+                        <i class="fas fa-building"></i>
+                    </span>
 
-                  <div class="mb-2">
-                      <label class="form-label">Mensaje</label>
-                      <textarea id="chat_mensaje" class="form-control" rows="2" required></textarea>
-                  </div>
+                <?php endif; ?>
+                    <div>
+                        <h3>
+                            <?= htmlspecialchars($usuario['nombreEmpresa']) ?>
+                        </h3>
+                    </div>
 
-                  <button class="btn btn-success w-100">Iniciar chat</button>
-              </form>
-          </div>
-      </div>
-  </div>
+                </div>
 
-  </div>
+
+                <p class="footer-description">
+
+                    <?= htmlspecialchars($usuario['descripcion_acerca']) ?>
+
+                </p>
+
+
+                <!-- Redes sociales -->
+
+                <div class="footer-social">
+
+                    <a
+                        href="#"
+                        aria-label="Facebook"
+                        title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="Twitter"
+                        title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="LinkedIn"
+                        title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="Instagram"
+                        title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ENLACES
+                 ================================================== -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h4 class="footer-title">
+                    Enlaces
+                </h4>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="./index.php">
+                            <i class="fas fa-angle-right"></i>
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./nosotros.php">
+                            <i class="fas fa-angle-right"></i>
+                            Conócenos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./propiedades.php">
+                            <i class="fas fa-angle-right"></i>
+                            Propiedades
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./asesores.php">
+                            <i class="fas fa-angle-right"></i>
+                            Asesores
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./contacto.php">
+                            <i class="fas fa-angle-right"></i>
+                            Contacto
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- ==================================================
+                 CONTACTO
+                 ================================================== -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h4 class="footer-title">
+                    Contáctanos
+                </h4>
+
+                <ul class="footer-contact">
+
+                    <?php if (!empty($usuario['celular'])): ?>
+
+                        <li>
+
+                            <span class="footer-contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    Teléfono
+                                </small>
+
+                                <a
+                                    href="tel:<?= htmlspecialchars($usuario['celular']) ?>">
+                                    (+51) <?= htmlspecialchars($usuario['celular']) ?>
+                                </a>
+
+                            </div>
+
+                        </li>
+
+                    <?php endif; ?>
+
+
+                    <?php if (!empty($usuario['email'])): ?>
+
+                        <li>
+
+                            <span class="footer-contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    Correo electrónico
+                                </small>
+
+                                <a
+                                    href="mailto:<?= htmlspecialchars($usuario['email']) ?>">
+                                    <?= htmlspecialchars($usuario['email']) ?>
+                                </a>
+
+                            </div>
+
+                        </li>
+
+                    <?php endif; ?>
+
+
+                    <?php if (!empty($usuario['direccion'])): ?>
+
+                        <li>
+
+                            <span class="footer-contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+
+                            <div>
+
+                                <small>
+                                    Dirección
+                                </small>
+
+                                <span class="footer-contact-text">
+                                    <?= htmlspecialchars($usuario['direccion']) ?>, Perú
+                                </span>
+
+                            </div>
+
+                        </li>
+
+                    <?php endif; ?>
+
+                </ul>
+
+            </div>
+
+
+            <!-- ==================================================
+                 HORARIOS
+                 ================================================== -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h4 class="footer-title">
+                    Horario de atención
+                </h4>
+
+                <ul class="footer-hours">
+
+                    <li>
+
+                        <div>
+                            <strong>
+                                Lunes - Viernes
+                            </strong>
+
+                            <span>
+                                8:30 a. m. - 6:30 p. m.
+                            </span>
+                        </div>
+
+                        <i class="far fa-clock"></i>
+
+                    </li>
+
+
+                    <li>
+
+                        <div>
+                            <strong>
+                                Sábado
+                            </strong>
+
+                            <span>
+                                9:30 a. m. - 1:00 p. m.
+                            </span>
+                        </div>
+
+                        <i class="far fa-clock"></i>
+
+                    </li>
+
+
+                    <li>
+
+                        <div>
+                            <strong>
+                                Domingo
+                            </strong>
+
+                            <span class="footer-closed">
+                                Cerrado
+                            </span>
+                        </div>
+
+                        <i class="far fa-clock"></i>
+
+                    </li>
+
+                </ul>
+
+
+                <div class="footer-availability">
+
+                    <span class="footer-status-dot"></span>
+
+                    <div>
+                        <strong>
+                            Atención personalizada
+                        </strong>
+
+                        <small>
+                            Estamos para ayudarte
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             DIVISOR
+             ================================================== -->
+
+        <div class="footer-divider"></div>
+
+
+        <!-- ==================================================
+             FOOTER INFERIOR
+             ================================================== -->
+
+        <div class="footer-bottom">
+
+            <p>
+
+                &copy;
+                <?= date('Y') ?>
+
+                <strong>
+                    <?= htmlspecialchars($usuario['nombreEmpresa']) ?>
+                </strong>.
+
+                Todos los derechos reservados.
+
+            </p>
+
+
+            <div class="footer-legal">
+
+                <!--<a href="#">
+                    Aviso Legal
+                </a>
+
+                <span>•</span>
+
+                <a href="#">
+                    Política de Privacidad
+                </a>-->
+
+                <span>•</span>
+
+                <span class="footer-developed">
+                    Desarrollado por
+                    <strong>CoDevPro Technology</strong>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================================
+     BOTÓN / CHAT WHATSAPP
+     ========================================================== -->
+
+<div
+    id="chatContainer"
+    class="chat-container">
+
+    <!-- Botón -->
+
+    <div id="chatButtonContainer">
+
+        <button
+            type="button"
+            id="chatButton"
+            class="chat-button"
+            aria-label="Chatea con nosotros por WhatsApp">
+
+            <i class="fab fa-whatsapp"></i>
+
+            <span>
+                Chatea con nosotros
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- Formulario -->
+
+    <div
+        id="chatFormContainer"
+        class="chat-form-container d-none">
+
+        <div class="chat-header">
+
+            <div class="d-flex align-items-center gap-2">
+
+                <i class="fab fa-whatsapp fs-5"></i>
+
+                <strong>
+                    WhatsApp
+                </strong>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeChatForm"
+                class="chat-close"
+                aria-label="Cerrar">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="chat-body">
+
+            <form id="chatForm">
+
+                <!-- Nombre -->
+
+                <div class="mb-3">
+
+                    <label
+                        for="chat_nombre"
+                        class="form-label">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="chat_nombre"
+                        class="form-control"
+                        placeholder="Ingresa tu nombre"
+                        autocomplete="name"
+                        required>
+
+                </div>
+
+
+                <!-- Asesor -->
+
+                <div class="mb-3">
+
+                    <label
+                        for="chat_asesor"
+                        class="form-label">
+                        Elige un asesor
+                    </label>
+
+                    <select
+                        id="chat_asesor"
+                        class="form-select"
+                        required>
+
+                        <option
+                            value=""
+                            selected
+                            disabled>
+                            Selecciona un asesor
+                        </option>
+
+
+                        <?php foreach ($asesores as $asesor): ?>
+
+                            <option
+                                value="<?= htmlspecialchars($asesor['celular']) ?>"
+                                data-nombre="<?= htmlspecialchars(
+                                                    $asesor['nombre'] . ' ' . $asesor['apellidos']
+                                                ) ?>">
+
+                                <?= htmlspecialchars(
+                                    $asesor['nombre'] . ' ' . $asesor['apellidos']
+                                ) ?>
+
+                                –
+                                <?= htmlspecialchars($asesor['celular']) ?>
+
+                            </option>
+
+                        <?php endforeach; ?>
+
+
+                        <?php if (empty($asesores)): ?>
+
+                            <option
+                                value=""
+                                disabled>
+                                No hay asesores disponibles
+                            </option>
+
+                        <?php endif; ?>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Mensaje -->
+
+                <div class="mb-3">
+
+                    <label
+                        for="chat_mensaje"
+                        class="form-label">
+                        Mensaje
+                    </label>
+
+                    <textarea
+                        id="chat_mensaje"
+                        class="form-control"
+                        rows="3"
+                        placeholder="¿En qué podemos ayudarte?"
+                        required></textarea>
+
+                </div>
+
+
+                <!-- Enviar -->
+
+                <button
+                    type="submit"
+                    class="btn btn-success w-100 chat-submit">
+
+                    <i class="fab fa-whatsapp me-2"></i>
+
+                    Iniciar conversación
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

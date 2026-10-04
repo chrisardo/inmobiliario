@@ -1,4 +1,4 @@
- <!--Productos section-->
+ <!--Productos section: otros/productos_index.php-->
  <div id="resultadoPropiedades" class="container position-relative">
      <div class="container my-0 mb-3 py-3 position-relative">
          <!--<div class="row mb-5">
@@ -25,12 +25,12 @@
                                      <?php $imagenBinaria = base64_encode($fila['imagen']); ?>
                                      <img
                                          src="data:image/jpeg;base64,<?= $imagenBinaria ?>"
-                                         class="card-img-top"
+                                         class="card-img-top" height="260"
                                          alt="Propiedad" />
                                  <?php else: ?>
                                      <img
                                          src="img/producto.png"
-                                         class="card-img-top"
+                                         class="card-img-top" height="260"
                                          alt="Propiedad sin imagen" />
                                  <?php endif; ?>
 

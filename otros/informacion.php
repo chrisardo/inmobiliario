@@ -1,32 +1,107 @@
-<!-- Horario de Atención -->
-<div class="container-fluid bg-white py-5">
-    <div class="container text-center">
+<!-- ======================================================
+         HORARIO DE ATENCIÓN
+    ======================================================= -->
 
-        <!-- Icono -->
-        <div class="d-flex justify-content-center mb-3">
-            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center"
-                style="width:70px; height:70px;">
-                <i class="bi bi-clock text-white fs-2"></i>
+    <section class="about-schedule-section">
+
+        <div class="container">
+
+            <div class="schedule-card">
+
+                <div class="schedule-icon">
+
+                    <i class="bi bi-clock"></i>
+
+                </div>
+
+
+                <div class="schedule-content">
+
+                    <span class="section-eyebrow">
+                        Estamos disponibles
+                    </span>
+
+                    <h2>
+                        Horario de Atención
+                    </h2>
+
+                    <div class="schedule-grid">
+
+                        <div class="schedule-item">
+
+                            <i class="bi bi-calendar-week"></i>
+
+                            <div>
+
+                                <strong>
+                                    Lunes a sábado
+                                </strong>
+
+                                <span>
+                                    10:00 a. m. a 7:00 p. m.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="schedule-item">
+
+                            <i class="bi bi-calendar-day"></i>
+
+                            <div>
+
+                                <strong>
+                                    Domingo
+                                </strong>
+
+                                <span>
+                                    10:00 a. m. a 6:00 p. m.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <?php if (!empty($usuario['direccion'])): ?>
+
+                        <div class="schedule-location">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                            <div>
+
+                                <strong>
+                                    Visita nuestro local
+                                </strong>
+
+                                <span>
+                                    <?= e($usuario['direccion']); ?>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    <?php endif; ?>
+
+
+                    <p class="schedule-message">
+
+                        <i class="bi bi-wifi me-2"></i>
+
+                        También atendemos a través de nuestros canales digitales.
+
+                    </p>
+
+                </div>
+
             </div>
+
         </div>
 
-        <!-- Título -->
-        <h2 class="fw-bold mb-3">Horario de Atención</h2>
-
-        <!-- Horarios -->
-        <p class="mb-1">L-S: 10:00 am a 7:00 pm</p>
-        <p class="mb-3">D: 10:00 am a 6:00 pm</p>
-
-        <!-- Dirección -->
-        <p class="mb-4">
-            <strong>Visita nuestro local:</strong>
-            <?php echo $usuario['direccion']; ?>
-        </p>
-
-        <!-- Mensaje -->
-        <p class="fw-semibold">
-            Te recordamos que estamos atendiendo a través de todos nuestros canales digitales
-        </p>
-
-    </div>
-</div>
+    </section>
