@@ -1,282 +1,970 @@
 <?php
-require_once "controladores/conect_db.php";
+//======================================================
+// CoDevPro Technology
+// Archivo: propiedades.php
+// Módulo: Propiedades
+// Sistema: Inmobiliario
+//======================================================
 
-$asesores = [];
-
-$sql = "SELECT id_asesor, nombre, apellidos, celular 
-        FROM asesores
-        ORDER BY nombre ASC";
-
-$result = $conexion->query($sql);
-
-if ($result && $result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $asesores[] = $row;
-  }
-}
-$sqlUsuario = "SELECT nombreEmpresa, ruc, fecha_registro, imagen , direccion, email, celular, estado, descripcion_acerca
-               FROM usuario_acceso";
-$stmt = $conexion->prepare($sqlUsuario);
-//$stmt->bind_param("i", $_SESSION['usId']);
-$stmt->execute();
-$result = $stmt->get_result();
-$usuario = $result->fetch_assoc();
-$fotoPerfil = null;
-if (!empty($usuario['imagen'])) {
-  $fotoPerfil = 'data:image/jpeg;base64,' . base64_encode($usuario['imagen']);
-}
-// Consulta para contar propiedades
-$sqlPropiedades = "SELECT COUNT(*) AS total FROM propiedades";
-$resultado1 = $conexion->query($sqlPropiedades);
-$fila0 = $resultado1->fetch_assoc();
-$totalPropiedades = $fila0['total'];
+require_once "controladores/index.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nosotros - <?php echo $usuario['nombreEmpresa']; ?> </title>
-  <!--Poner icono de la pagina web-->
 
-  <link rel="icon" href="img/logo.png" type="image/svg+xml" />
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet" />
-  <!--Llamar a css/style.css-->
-  <link rel="stylesheet" href="css/style.css" />
-  <!-- Bootstrap Bundle con Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Font Awesome para iconos -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Bootstrap Icons (OBLIGATORIO para los íconos) -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="css/producto.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!--llamar a js/buscar_propiedades.js-->
-  <script src="js/buscar_propiedades.js"></script>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <meta
+        name="description"
+        content="Propiedades disponibles de <?= e($nombreEmpresa) ?>">
+
+    <meta
+        name="theme-color"
+        content="#198754">
+
+    <title>
+        Propiedades - <?= e($nombreEmpresa) ?>
+    </title>
+
+
+    <!--==================================================
+      FAVICON
+    ==================================================-->
+    <?php if ($fotoPerfil): ?>
+        <link
+            rel="icon"
+            href="<?= $fotoPerfil ?>"
+            type="image/png">
+
+
+    <?php else: ?>
+
+        <span class="company-logo-placeholder">
+
+            <i class="fa-solid fa-building"></i>
+
+        </span>
+
+    <?php endif; ?>
+    <!--==================================================
+      BOOTSTRAP
+    ==================================================-->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!--==================================================
+      FONT AWESOME
+    ==================================================-->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <!--==================================================
+      BOOTSTRAP ICONS
+    ==================================================-->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+
+    <!--==================================================
+      CSS GENERAL
+    ==================================================-->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+
+    <!--==================================================
+      CSS PROPIEDADES
+    ==================================================-->
+
+    <link
+        rel="stylesheet"
+        href="css/producto.css">
+
+
+    <!--==================================================
+      JQUERY
+    ==================================================-->
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+
 </head>
 
+
 <body>
-  <!-- Barra superior de información -->
-  <?php require "otros/barra_superior.php"; ?>
 
-  <!-- Barra de navegación principal -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white py-1 shadow-sm">
-    <div class="container">
-      <div class="d-flex flex-column">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-          <!--<img
-              src="img/logo.png"
-              alt="Logo"
-              width="50"
-              height="50" />-->
-          <?php if ($fotoPerfil): ?>
-            <img src="<?= $fotoPerfil ?>" class="rounded-circle border-success" width="44" height="44">
-          <?php else: ?>
-            <i class="fas fa-user-circle fa-2x"></i>
-          <?php endif; ?>
-        </a>
-        <small class="text-muted"><?php ?><?php //echo utf8_decode($usuario['nombreEmpresa']); 
-                                          ?></small>
-      </div>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!--======================================================
+  BARRA SUPERIOR
+=======================================================-->
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+    <?php require "otros/barra_superior.php"; ?>
+
+
+    <!-- ======================================================
+         NAVBAR
+    ======================================================= -->
+
+    <nav class="navbar navbar-expand-lg main-navbar">
+
+        <div class="container">
+
+            <!-- LOGO + EMPRESA -->
+
             <a
-              class="nav-link fw-medium text-dark px-3 active"
-              href="index.php">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link fw-medium text-dark px-3"
-              href="nosotros.php">Conócenos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-medium text-success fw-bold  px-3" href="propiedades.php">Propiedades</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link fw-medium px-3" href="asesores.php">
-              Asesores
+                class="navbar-brand d-flex align-items-center"
+                href="index.php">
+
+                <?php if ($fotoPerfil): ?>
+
+                    <img
+                        src="<?= e($fotoPerfil); ?>"
+                        alt="Logo <?= e($nombreEmpresa); ?>"
+                        class="company-logo">
+
+                <?php else: ?>
+
+                    <span class="company-logo-placeholder">
+                        <i class="fas fa-building"></i>
+                    </span>
+
+                <?php endif; ?>
+
+                <span class="company-name">
+                    <?= e($nombreEmpresa); ?>
+                </span>
+
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-medium text-dark px-3" href="contacto.php">Contacto</a>
-          </li>
-        </ul>
-        <!--Agregar boton de login-->
-        <div class="ms-3">
-          <a href="login.php" target="_blank" class="btn btn-success btn-sm px-4">Iniciar Sesión</a>
+
+
+            <!-- BOTÓN MOBILE -->
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Abrir menú">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <!-- MENÚ -->
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarNav">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="index.php">
+
+                            Inicio
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link "
+                            aria-current="page"
+                            href="nosotros.php">
+
+                            Conócenos
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            href="propiedades.php">
+
+                            Propiedades
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="asesores.php">
+
+                            Asesores
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="contacto.php">
+
+                            Contacto
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+
+                <!-- LOGIN -->
+
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+
+                    <a
+                        href="login.php"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-success px-4">
+
+                        <i class="bi bi-person-circle me-1"></i>
+
+                        Login
+
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
-    </div>
-  </nav>
-  </div>
-  <br /><br />
-  <!-- Encabezado estilo Bootstrap -->
-  <header class="bg-dark text-white py-4 mt-4">
-    <div class="container">
-      <div class="row align-items-center">
-        <!-- Título a la izquierda -->
-        <div class="col-12 col-md-6">
-          <h1 class="h4 fw-bold mb-0">Propiedades</h1>
+
+    </nav>
+
+
+    <!--======================================================
+  ENCABEZADO
+=======================================================-->
+
+    <header class="property-header">
+
+        <div class="container">
+
+            <div class="row align-items-center g-3">
+
+
+                <!-- TÍTULO -->
+
+                <div class="col-12 col-md-7">
+
+                    <div class="property-header-content">
+
+                        <span class="property-header-label">
+
+                            <i class="bi bi-buildings"></i>
+
+                            Encuentra tu próximo hogar
+
+                        </span>
+
+
+                        <h1 class="fw-bold mb-2">
+
+                            Propiedades
+
+                        </h1>
+
+
+                        <p class="mb-0">
+
+                            Descubre nuestras propiedades disponibles
+                            y encuentra el espacio ideal para ti.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BREADCRUMB -->
+
+                <div class="col-12 col-md-5">
+
+                    <nav
+                        aria-label="breadcrumb">
+
+                        <ol
+                            class="breadcrumb justify-content-md-end mb-0">
+
+                            <li class="breadcrumb-item">
+
+                                <a
+                                    href="index.php"
+                                    class="text-white text-decoration-none">
+
+                                    <i class="bi bi-house-door me-1"></i>
+
+                                    Inicio
+
+                                </a>
+
+                            </li>
+
+
+                            <li
+                                class="breadcrumb-item active text-white"
+                                aria-current="page">
+
+                                Propiedades
+
+                            </li>
+
+                        </ol>
+
+                    </nav>
+
+                </div>
+
+            </div>
+
         </div>
-        <!-- Breadcrumb a la derecha -->
-        <div class="col-12 col-md-6">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-md-end mb-0">
-              <li class="breadcrumb-item">
-                <a href="/" class="text-white text-decoration-none">HOME</a>
-              </li>
-              <li class="breadcrumb-item">></li>
 
-              <li
-                class="breadcrumb-item active text-white"
-                aria-current="page">
-                PROPIEDADES
-              </li>
-            </ol>
-          </nav>
+    </header>
+
+
+    <!--======================================================
+  CONTENIDO PRINCIPAL
+=======================================================-->
+
+    <main>
+
+
+        <!--==================================================
+      CABECERA Y BUSCADOR
+    ==================================================-->
+
+        <div class="container py-4">
+
+
+            <!--================================================
+          CABECERA DE RESULTADOS
+        =================================================-->
+
+            <div class="row align-items-center mb-3">
+
+
+                <div class="col-12 col-lg-7">
+
+                    <div>
+
+                        <h2 class="fw-bold mb-1">
+
+                            Propiedades disponibles
+
+                        </h2>
+
+
+                        <p class="text-muted mb-0">
+
+                            Explora nuestras opciones y solicita
+                            información.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTADOR -->
+
+                <div class="col-12 col-lg-5 mt-3 mt-lg-0">
+
+                    <div class="property-count-box">
+
+                        <div class="property-count-icon">
+
+                            <i class="bi bi-house-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <small class="text-muted d-block">
+
+                                Propiedades disponibles
+
+                            </small>
+
+
+                            <strong class="fs-5">
+
+                                <?= number_format(
+                                    $totalPropiedades
+                                ) ?>
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!--================================================
+  BUSCADOR Y FILTROS
+================================================-->
+
+            <div class="search-property-card mb-4">
+
+                <form id="formFiltrosPropiedades">
+
+                    <!--============================================
+          BUSCADOR PRINCIPAL
+        =============================================-->
+
+                    <div class="row g-3">
+
+                        <div class="col-12">
+
+                            <label
+                                for="inputBuscar"
+                                class="form-label fw-semibold">
+
+                                <i class="bi bi-search me-1 text-success"></i>
+
+                                Buscar propiedad
+
+                            </label>
+
+                            <div class="position-relative">
+
+                                <i
+                                    class="bi bi-search search-icon"
+                                    aria-hidden="true">
+                                </i>
+
+                                <input
+                                    id="inputBuscar"
+                                    name="buscar"
+                                    class="form-control property-search-input"
+                                    type="search"
+                                    autocomplete="off"
+                                    placeholder="Código, nombre o ubicación..."
+                                    aria-label="Buscar propiedades">
+
+                                <button
+                                    type="button"
+                                    id="btnLimpiarBusqueda"
+                                    class="btn btn-sm btn-light search-clear-button"
+                                    title="Limpiar búsqueda"
+                                    aria-label="Limpiar búsqueda">
+
+                                    <i class="bi bi-x-lg"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!--============================================
+              CATEGORÍA
+            =============================================-->
+
+                        <div class="col-12 col-md-6 col-lg-3">
+
+                            <label
+                                for="filtroCategoria"
+                                class="form-label small fw-semibold">
+
+                                <i class="bi bi-tag me-1 text-success"></i>
+
+                                Categoría
+
+                            </label>
+
+                            <select
+                                id="filtroCategoria"
+                                name="categoria"
+                                class="form-select">
+
+                                <option value="">
+                                    Todas las categorías
+                                </option>
+
+                                <?php
+
+                                $sqlCategorias = "
+                        SELECT
+                            id_categoria,
+                            nombre
+                        FROM categoria
+                        WHERE
+                            COALESCE(Eliminado, 0) = 0
+                        ORDER BY nombre ASC
+                    ";
+
+                                $resultadoCategorias =
+                                    $conexion->query(
+                                        $sqlCategorias
+                                    );
+
+                                if (
+                                    $resultadoCategorias &&
+                                    $resultadoCategorias->num_rows > 0
+                                ):
+
+                                    while (
+                                        $categoriaFiltro =
+                                        $resultadoCategorias->fetch_assoc()
+                                    ):
+
+                                ?>
+
+                                        <option
+                                            value="<?= (int)$categoriaFiltro['id_categoria'] ?>">
+
+                                            <?= e(
+                                                $categoriaFiltro['nombre']
+                                            ) ?>
+
+                                        </option>
+
+                                <?php
+
+                                    endwhile;
+
+                                    $resultadoCategorias->free();
+
+                                endif;
+
+                                ?>
+
+                            </select>
+
+                        </div>
+
+
+                        <!--============================================
+              PRECIO MÍNIMO
+            =============================================-->
+
+                        <div class="col-12 col-md-6 col-lg-3">
+
+                            <label
+                                for="precioMin"
+                                class="form-label small fw-semibold">
+
+                                <i class="bi bi-currency-dollar me-1 text-success"></i>
+
+                                Precio mínimo
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    S/.
+                                </span>
+
+                                <input
+                                    type="number"
+                                    id="precioMin"
+                                    name="precio_min"
+                                    class="form-control"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0">
+
+                            </div>
+
+                        </div>
+
+
+                        <!--============================================
+              PRECIO MÁXIMO
+            =============================================-->
+
+                        <div class="col-12 col-md-6 col-lg-3">
+
+                            <label
+                                for="precioMax"
+                                class="form-label small fw-semibold">
+
+                                <i class="bi bi-cash-stack me-1 text-success"></i>
+
+                                Precio máximo
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    S/.
+                                </span>
+
+                                <input
+                                    type="number"
+                                    id="precioMax"
+                                    name="precio_max"
+                                    class="form-control"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="Sin límite">
+
+                            </div>
+
+                        </div>
+
+
+                        <!--============================================
+              ÁREA MÍNIMA
+            =============================================-->
+
+                        <div class="col-12 col-md-6 col-lg-3">
+
+                            <label
+                                for="areaMin"
+                                class="form-label small fw-semibold">
+
+                                <i class="bi bi-arrows-fullscreen me-1 text-success"></i>
+
+                                Área mínima
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <input
+                                    type="number"
+                                    id="areaMin"
+                                    name="area_min"
+                                    class="form-control"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0">
+
+                                <span class="input-group-text">
+                                    m²
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!--============================================
+              ÁREA MÁXIMA
+            =============================================-->
+
+                        <div class="col-12 col-md-6 col-lg-3">
+
+                            <label
+                                for="areaMax"
+                                class="form-label small fw-semibold">
+
+                                <i class="bi bi-bounding-box me-1 text-success"></i>
+
+                                Área máxima
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <input
+                                    type="number"
+                                    id="areaMax"
+                                    name="area_max"
+                                    class="form-control"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="Sin límite">
+
+                                <span class="input-group-text">
+                                    m²
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!--============================================
+              FECHA DESDE
+            =============================================-->
+
+                        <div class="col-12 col-md-6 col-lg-3">
+
+                            <label
+                                for="fechaDesde"
+                                class="form-label small fw-semibold">
+
+                                <i class="bi bi-calendar-event me-1 text-success"></i>
+
+                                Registrada desde
+
+                            </label>
+
+                            <input
+                                type="date"
+                                id="fechaDesde"
+                                name="fecha_desde"
+                                class="form-control">
+
+                        </div>
+
+
+                        <!--============================================
+              ORDEN
+            =============================================-->
+
+                        <div class="col-12 col-md-6 col-lg-3">
+
+                            <label
+                                for="orden"
+                                class="form-label small fw-semibold">
+
+                                <i class="bi bi-sort-down me-1 text-success"></i>
+
+                                Ordenar por
+
+                            </label>
+
+                            <select
+                                id="orden"
+                                name="orden"
+                                class="form-select">
+
+                                <option value="recientes">
+                                    Más recientes
+                                </option>
+
+                                <option value="antiguos">
+                                    Más antiguos
+                                </option>
+
+                                <option value="precio_asc">
+                                    Precio: menor a mayor
+                                </option>
+
+                                <option value="precio_desc">
+                                    Precio: mayor a menor
+                                </option>
+
+                                <option value="area_asc">
+                                    Área: menor a mayor
+                                </option>
+
+                                <option value="area_desc">
+                                    Área: mayor a menor
+                                </option>
+
+                                <option value="nombre">
+                                    Nombre A-Z
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!--============================================
+              BOTONES
+            =============================================-->
+
+                        <div class="col-12">
+
+                            <div class="d-flex flex-wrap justify-content-end gap-2 pt-2">
+
+                                <button
+                                    type="button"
+                                    id="btnLimpiarFiltros"
+                                    class="btn btn-outline-secondary">
+
+                                    <i class="bi bi-arrow-counterclockwise me-1"></i>
+
+                                    Limpiar filtros
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+                <!--============================================
+      ESTADO DE BÚSQUEDA
+    =============================================-->
+
+                <div
+                    id="loadingBusqueda"
+                    class="search-loading d-none">
+
+                    <div
+                        class="spinner-border spinner-border-sm text-success me-2"
+                        role="status">
+
+                    </div>
+
+                    Buscando propiedades...
+
+                </div>
+
+            </div>
+
+
+            <!--================================================
+  CONTADOR RESULTADOS
+================================================-->
+
+            <div
+                class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+
+                <p
+                    id="contadorResultados"
+                    class="text-muted mb-0">
+
+                    Resultado:
+
+                    <strong>
+                        <?= number_format($totalPropiedades) ?>
+                    </strong>
+
+                    en la zona.
+
+                </p>
+
+
+                <span
+                    id="textoResultados"
+                    class="small text-muted">
+
+                    Mostrando
+                    <?= number_format($totalPropiedades) ?>
+                    propiedades
+
+                </span>
+
+            </div>
+
+            <!--==================================================
+  RESULTADO DE PROPIEDADES
+==================================================-->
+
+            <div
+                id="resultadoPropiedades"
+                class="container position-relative ">
+
+                <div class="row g-4">
+
+                    <div class="col-12">
+
+                        <div class="property-initial-loading">
+
+                            <div
+                                class="spinner-border text-success"
+                                role="status">
+
+                            </div>
+
+                            <p class="mt-3 mb-0 text-muted">
+
+                                Cargando propiedades...
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
 
-  <div class="container  py-2 mt-2">
-    <!-- Barra de búsqueda y botón de exportar -->
-    <div class="row g-2 align-items-center">
-      <!-- Buscador -->
-      <div class="col-12 col-md">
-        <div class="card p-2">
-          <form id="formBuscar" class="d-flex">
-            <input
-              id="inputBuscar"
-              class="form-control me-2"
-              type="search"
-              placeholder="Buscar propiedad por código, nombre, ubicación, precio, fecha">
-          </form>
+    </main>
+    <?php include 'modal/modal_detalle_propiedad.php'; ?>
 
-        </div>
-      </div>
-    </div>
-    <p class="card-title mb-0 py-2 mt-2 fw-bold">Resultado: <?php echo $totalPropiedades; ?> en la zona.</p>
-  </div>
-  <!-- llamar a otros/productos_index.php -->
-  <?php include 'otros/productos_index.php'; ?>
-  <!-- llamar a otros/footer.php -->
-  <?php include 'otros/footer.php'; ?>
-  <script>
-    // Al cargar, animar texto; cuando termine, animar imagen
-    window.addEventListener("DOMContentLoaded", () => {
-      const text = document.querySelector(".hero-text");
-      const image = document.querySelector(".hero-image");
+    <!--======================================================
+  FOOTER
+=======================================================-->
 
-      // Asegura que la imagen permanezca oculta y fuera mientras entra el texto
-      image.style.visibility = "hidden";
+    <?php include 'otros/footer.php'; ?>
 
-      // Disparar animación del texto
-      text.classList.add("animate-text");
 
-      // Cuando el texto termina, mostrar y animar la imagen
-      text.addEventListener(
-        "animationend",
-        () => {
-          image.style.visibility = "visible";
-          image.classList.add("animate-image");
-        }, {
-          once: true
-        }
-      );
-    });
-  </script>
-  <script>
-    $(function() {
+    <!--======================================================
+  BOOTSTRAP JS
+=======================================================-->
 
-      /* ===============================
-         ABRIR CHAT
-      =============================== */
-      $("#chatButton").on("click", function() {
-        $("#chatButtonContainer").hide();
-        $("#chatFormContainer").removeClass("d-none");
-      });
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
 
-      /* ===============================
-         CERRAR CHAT
-      =============================== */
-      $("#closeChatForm").on("click", function() {
-        $("#chatFormContainer").addClass("d-none");
-        $("#chatButtonContainer").show();
-      });
 
-      /* ===============================
-         ENVIAR WHATSAPP
-      =============================== */
-      $("#chatForm").on("submit", function(e) {
-        e.preventDefault();
+    <!--======================================================
+  BUSCADOR DE PROPIEDADES
+=======================================================-->
 
-        const nombre = $("#chat_nombre").val().trim();
-        const mensaje = $("#chat_mensaje").val().trim();
-        const asesorTelefono = $("#chat_asesor").val();
-        const asesorNombre = $("#chat_asesor option:selected").data("nombre");
+    <script
+        src="js/buscar_propiedades.js">
+    </script>
+    <script
+        src="js/detalle_propiedad.js">
+    </script>
 
-        /* ===============================
-           VALIDACIONES
-        =============================== */
-        if (!asesorTelefono) {
-          alert("⚠️ Seleccione un asesor.");
-          return;
-        }
+    <!--======================================================
+  NAVBAR + ANIMACIONES + CHAT
+=======================================================-->
+    <script
+        src="js/script.js">
+    </script>
+    <!--======================================================
+  SCRIPT GENERAL
+=======================================================-->
+    <script
+        src="js/chat.js">
+    </script>
 
-        if (nombre.length < 3) {
-          alert("⚠️ Ingrese su nombre.");
-          return;
-        }
 
-        if (mensaje.length < 0) {
-          alert("⚠️ Escriba un mensaje.");
-          return;
-        }
-
-        if (!/^[0-9]{9}$/.test(asesorTelefono)) {
-          alert("⚠️ Número de WhatsApp inválido.");
-          return;
-        }
-
-        /* ===============================
-           MENSAJE FORMAL
-        =============================== */
-        const empresa = "Mi Inmobiliaria";
-
-        const texto = `
-${mensaje}
-        `.trim();
-
-        /* ===============================
-           ABRIR WHATSAPP
-        =============================== */
-        const url = `https://api.whatsapp.com/send?phone=51${asesorTelefono}&text=${encodeURIComponent(texto)}`;
-        window.open(url, "_blank");
-      });
-
-    });
-  </script>
-  <!--llamar a js/script.js-->
-  <script src="js/script.js"></script>
 </body>
 
 </html>

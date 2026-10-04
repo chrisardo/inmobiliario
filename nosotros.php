@@ -1,428 +1,869 @@
 <?php
-require_once "controladores/conect_db.php";
+// ==========================================================
+// CoDevPro Technology
+// Archivo: nosotros.php
+// Módulo: Página Nosotros
+// Sistema: Inmobiliaria
+// ==========================================================
 
-$asesores = [];
-
-$sql = "SELECT id_asesor, nombre, apellidos, celular 
-        FROM asesores
-        ORDER BY nombre ASC";
-
-$result = $conexion->query($sql);
-
-if ($result && $result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $asesores[] = $row;
-  }
-}
-$sqlUsuario = "SELECT nombreEmpresa, ruc, fecha_registro, imagen , direccion, email, celular, estado, descripcion_acerca
-               FROM usuario_acceso";
-$stmt = $conexion->prepare($sqlUsuario);
-//$stmt->bind_param("i", $_SESSION['usId']);
-$stmt->execute();
-$result = $stmt->get_result();
-$usuario = $result->fetch_assoc();
-$fotoPerfil = null;
-if (!empty($usuario['imagen'])) {
-  $fotoPerfil = 'data:image/jpeg;base64,' . base64_encode($usuario['imagen']);
-}
-// Consulta para contar propiedades
-$sqlPropiedades = "SELECT COUNT(*) AS total FROM propiedades";
-$resultado1 = $conexion->query($sqlPropiedades);
-$fila0 = $resultado1->fetch_assoc();
-$totalPropiedades = $fila0['total'];
+require_once "controladores/index.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nosotros - <?php echo $usuario['nombreEmpresa']; ?> </title>
-  <!--Poner icono de la pagina web-->
 
-  <link rel="icon" href="img/logo.png" type="image/svg+xml" />
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet" />
-  <!--Llamar a css/style.css-->
-  <link rel="stylesheet" href="css/style.css" />
-  <!-- Bootstrap Bundle con Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Font Awesome para iconos -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Bootstrap Icons (OBLIGATORIO para los íconos) -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <meta
+        name="description"
+        content="<?= e($descripcionEmpresa); ?>">
+
+    <meta
+        name="author"
+        content="<?= e($nombreEmpresa); ?>">
+
+    <title>
+        Nosotros - <?= e($nombreEmpresa); ?>
+    </title>
+
+    <!-- ======================================================
+         FAVICON
+    ======================================================= -->
+
+    <?php if ($fotoPerfil): ?>
+        <link
+            rel="icon"
+            href="<?= $fotoPerfil ?>"
+            type="image/png">
+
+
+    <?php else: ?>
+
+        <span class="company-logo-placeholder">
+
+            <i class="fa-solid fa-building"></i>
+
+        </span>
+
+    <?php endif; ?>
+
+    <!-- ======================================================
+         BOOTSTRAP
+    ======================================================= -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- ======================================================
+         FONT AWESOME
+    ======================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ======================================================
+         BOOTSTRAP ICONS
+    ======================================================= -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- ======================================================
+         CSS PRINCIPAL
+    ======================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
 </head>
 
 <body>
-  <?php require "otros/barra_superior.php"; ?>
-  <!-- Barra de navegación principal -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white py-1 shadow-sm">
-    <div class="container">
-      <div class="d-flex flex-column">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-          <!--<img
-              src="img/logo.png"
-              alt="Logo"
-              width="50"
-              height="50" />-->
-          <?php if ($fotoPerfil): ?>
-            <img src="<?= $fotoPerfil ?>" class="rounded-circle border-success" width="44" height="44">
-          <?php else: ?>
-            <i class="fas fa-user-circle fa-2x"></i>
-          <?php endif; ?>
-        </a>
-        <small class="text-muted"><?php ?><?php //echo utf8_decode($usuario['nombreEmpresa']); 
-                                          ?></small>
-      </div>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!-- ======================================================
+         BARRA SUPERIOR
+    ======================================================= -->
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+    <?php require "otros/barra_superior.php"; ?>
+
+
+    <!-- ======================================================
+         NAVBAR
+    ======================================================= -->
+
+    <nav class="navbar navbar-expand-lg main-navbar">
+
+        <div class="container">
+
+            <!-- LOGO + EMPRESA -->
+
             <a
-              class="nav-link fw-medium text-dark px-3  active"
-              href="index.php">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link fw-medium text-success fw-bold px-3"
-              href="nosotros.php">Conócenos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-medium text-dark px-3" href="propiedades.php">Propiedades</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link fw-medium px-3" href="asesores.php">
-              Asesores
+                class="navbar-brand d-flex align-items-center"
+                href="index.php">
+
+                <?php if ($fotoPerfil): ?>
+
+                    <img
+                        src="<?= e($fotoPerfil); ?>"
+                        alt="Logo <?= e($nombreEmpresa); ?>"
+                        class="company-logo">
+
+                <?php else: ?>
+
+                    <span class="company-logo-placeholder">
+                        <i class="fas fa-building"></i>
+                    </span>
+
+                <?php endif; ?>
+
+                <span class="company-name">
+                    <?= e($nombreEmpresa); ?>
+                </span>
+
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-medium text-dark px-3" href="contacto.php">Contacto</a>
-          </li>
-        </ul>
-        <!--Agregar boton de login-->
-        <div class="ms-3">
-          <a href="login.php" target="_blank" class="btn btn-success btn-sm px-4">Iniciar Sesión</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  </div>
-  <br /><br />
-  <!-- Encabezado estilo Bootstrap -->
-  <header class="bg-dark text-white py-4 mt-4">
-    <div class="container">
-      <div class="row align-items-center">
-        <!-- Título a la izquierda -->
-        <div class="col-12 col-md-6">
-          <h1 class="h4 fw-bold mb-0">Nosotros</h1>
-        </div>
-        <!-- Breadcrumb a la derecha -->
-        <div class="col-12 col-md-6">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-md-end mb-0">
-              <li class="breadcrumb-item">
-                <a href="/" class="text-white text-decoration-none">HOME</a>
-              </li>
-              <li class="breadcrumb-item">></li>
 
-              <li
-                class="breadcrumb-item active text-white"
-                aria-current="page">
-                NOSOTROS
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- Hero Section -->
-  <div class="bg-light py-2 mt-2">
-    <div
-      class="container overflow-hidden"
-      style="
-          background-image: url('img/fondo3.png');
-          background-size: cover;
-          background-position: center;
-        ">
-      <div class="row align-items-center">
-        <!-- Texto: entra primero desde la derecha -->
-        <div class="col-lg-6 hero-text">
-          <h1 class="display-5 fw-bold text-success mb-4 fs-3">
-            <?php echo $usuario['nombreEmpresa']; ?>
-          </h1>
-          <!--<p class="fw-bold">Ingeniería contra incendios</p>-->
-          <p class="lead mb-0 fs-6">
-            <?php echo $usuario['descripcion_acerca']; ?>
-          </p>
-        </div>
 
-        <!-- Imagen: entra después desde la derecha -->
-        <div class="col-lg-6 text-center border-success hero-image">
-          <?php if ($fotoPerfil): ?>
-            <img
-              src="<?= $fotoPerfil ?>"
-              alt="Hero Image"
-              class="rounded border-success" width="400" height="300" />
-          <?php else: ?>
-            <i class="fas fa-user-circle fa-2x"></i>
-          <?php endif; ?>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- BOTÓN MOBILE -->
 
-  <section class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col">
-        <div class="card border-success mb-3">
-          <div
-            class="fw-bold card-header bg-transparent border-secondary text-center">
-            Misión de la empresa
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              Brindar soluciones integrales a nuestros clientes, enfocándonos
-              en la seguridad, calidad, productividad, contribuyendo al
-              desarrollo sostenible de nuestra sociedad.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card border-secondary mb-3">
-          <div
-            class="fw-bold card-header bg-transparent border-secondary text-center">
-            Visión de la empresa
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              Ser reconocida como empresa líder en el mercado por sus
-              servicios especializados.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card border-secondary mb-3">
-          <div
-            class="fw-bold card-header bg-transparent border-secondary text-center">
-            Valores de la empresa
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              Vocación de servicio Ética Seguridad laboral Compromiso con el
-              cliente Transparencia comercial Trabajo en Equipo
-              Responsabilidad social
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="cta-section bg-dark text-white py-5">
-    <div
-      class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <h2 class="cta-text mb-3 mb-md-0 text-center text-md-start">
-        Cuéntanos sobre <strong>TU próximo Proyecto</strong>
-      </h2>
-      <a href="contacto.php">
-        <button class="btn btn-success btn-lg px-4">Cotiza</button>
-      </a>
-    </div>
-  </section>
-  <!-- llamar a otros/productos_index.php -->
-  <?php include 'otros/informacion.php'; ?>
-  <!--Industrias section-->
-  <!--<div class="container-fluid bg-secondary-subtle position-relative">
-    <div class="container my-0 mb-4 py-4 position-relative">
-      <div class="row mb-5">
-        <div class="col text-center">
-          <h2 class="fw-bold text-dark">
-            Industrias con las que nos Comprometemos
-          </h2>
-        </div>
-      </div>-->
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Abrir menú">
 
-  <!-- 5 columnas -->
-  <!--<div class="row row-cols-1 row-cols-md-5 g-2">
-        <div class="col">
-          <div class="card card-hover h-100 shadow-lg">
-            <div class="card-body text-center p-4">
-              <div
-                class="text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-building fa-lg"></i>
-              </div>
-              <h5 class="card-title text-dark fw-bold fs-5">Residencial</h5>
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <!-- MENÚ -->
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarNav">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="index.php">
+
+                            Inicio
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            aria-current="page"
+                            href="nosotros.php">
+
+                            Conócenos
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="propiedades.php">
+
+                            Propiedades
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="asesores.php">
+
+                            Asesores
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="contacto.php">
+
+                            Contacto
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+
+                <!-- LOGIN -->
+
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+
+                    <a
+                        href="login.php"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-success px-4">
+
+                        <i class="bi bi-person-circle me-1"></i>
+
+                        Login
+
+                    </a>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
 
-        <div class="col">
-          <div class="card card-hover h-100 shadow-lg">
-            <div class="card-body text-center p-4">
-              <div
-                class="text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-shopping-cart fa-lg"></i>
-              </div>
-              <h5 class="card-title text-dark fw-bold fs-5">Comercial</h5>
+    </nav>
+
+
+    <!-- ======================================================
+         ENCABEZADO / BREADCRUMB
+    ======================================================= -->
+
+    <header class="page-header">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-7">
+
+                    <span class="page-header-eyebrow">
+                        Conoce nuestra empresa
+                    </span>
+
+                    <h1>
+                        Nosotros
+                    </h1>
+
+                    <p>
+                        Descubre quiénes somos, nuestros valores y el compromiso
+                        que tenemos con nuestros clientes.
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-5">
+
+                    <nav
+                        aria-label="breadcrumb">
+
+                        <ol class="breadcrumb justify-content-lg-end mb-0">
+
+                            <li class="breadcrumb-item">
+
+                                <a href="index.php">
+                                    Inicio
+                                </a>
+
+                            </li>
+
+                            <li
+                                class="breadcrumb-item active"
+                                aria-current="page">
+
+                                Nosotros
+
+                            </li>
+
+                        </ol>
+
+                    </nav>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
 
-        <div class="col">
-          <div class="card card-hover shadow-lg">
-            <div class="card-body text-center p-4">
-              <div
-                class="text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-hard-hat fa-lg"></i>
-              </div>
-              <h5 class="card-title text-dark fw-bold fs-5">Construcción</h5>
+    </header>
+
+
+    <!-- ======================================================
+         PRESENTACIÓN DE LA EMPRESA
+    ======================================================= -->
+
+    <section class="about-hero-section">
+
+        <div class="container">
+
+            <div class="row align-items-center g-5">
+
+                <!-- TEXTO -->
+
+                <div class="col-lg-6">
+
+                    <span class="section-eyebrow">
+                        Sobre nosotros
+                    </span>
+
+                    <h2 class="section-title mb-4">
+
+                        <?= e($nombreEmpresa); ?>
+
+                    </h2>
+
+                    <p class="about-description">
+
+                        <?= nl2br(e($descripcionEmpresa)); ?>
+
+                    </p>
+
+
+                    <!-- INFORMACIÓN RÁPIDA -->
+
+                    <div class="row g-3 mt-4">
+
+                        <div class="col-sm-6">
+
+                            <div class="about-mini-card">
+
+                                <div class="about-mini-icon">
+
+                                    <i class="bi bi-building"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        <?= number_format($totalPropiedades); ?>
+                                    </strong>
+
+                                    <span>
+                                        Propiedades disponibles
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="about-mini-card">
+
+                                <div class="about-mini-icon">
+
+                                    <i class="bi bi-shield-check"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Calidad
+                                    </strong>
+
+                                    <span>
+                                        Servicio profesional
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTONES -->
+
+                    <div class="about-actions mt-4">
+
+                        <a
+                            href="propiedades.php"
+                            class="btn btn-success btn-lg">
+
+                            <i class="bi bi-buildings me-2"></i>
+
+                            Ver propiedades
+
+                        </a>
+
+                        <a
+                            href="contacto.php"
+                            class="btn btn-outline-success btn-lg">
+
+                            <i class="bi bi-chat-dots me-2"></i>
+
+                            Contáctanos
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IMAGEN -->
+
+                <div class="col-lg-6">
+
+                    <div class="about-image-card">
+
+                        <?php if ($fotoPerfil): ?>
+
+                            <img
+                                src="<?= e($fotoPerfil); ?>"
+                                alt="<?= e($nombreEmpresa); ?>"
+                                class="about-company-image">
+
+                        <?php else: ?>
+
+                            <div class="about-image-placeholder">
+
+                                <i class="bi bi-building"></i>
+
+                                <span>
+                                    <?= e($nombreEmpresa); ?>
+                                </span>
+
+                            </div>
+
+                        <?php endif; ?>
+
+
+                        <div class="about-image-badge">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <div>
+
+                                <strong>
+                                    Atención profesional
+                                </strong>
+
+                                <small>
+                                    Siempre listos para ayudarte
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
 
-        <div class="col">
-          <div class="card card-hover shadow-lg">
-            <div class="card-body text-center p-4">
-              <div
-                class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 text-danger">
-                <i class="fas fa-industry fa-lg"></i>
-              </div>
-              <h5 class="card-title text-dark fw-bold fs-5">Industrial</h5>
+    </section>
+
+
+    <!-- ======================================================
+         MISIÓN / VISIÓN / VALORES
+    ======================================================= -->
+
+    <section class="about-values-section">
+
+        <div class="container">
+
+            <div class="section-heading text-center">
+
+                <span class="section-eyebrow">
+                    Lo que nos representa
+                </span>
+
+                <h2 class="section-title">
+                    Nuestra misión, visión y valores
+                </h2>
+
+                <p class="section-description">
+                    Trabajamos con principios claros para ofrecer una
+                    experiencia confiable y profesional a nuestros clientes.
+                </p>
+
             </div>
-          </div>
-        </div>
 
-        <div class="col">
-          <div class="card card-hover shadow-lg">
-            <div class="card-body text-center p-4">
-              <div
-                class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 text-danger">
-                <i class="fas fa-gem fa-lg"></i>
-              </div>
-              <h5 class="card-title text-dark fw-bold fs-5">Minería</h5>
+
+            <div class="row g-4">
+
+                <!-- MISIÓN -->
+
+                <div class="col-lg-4">
+
+                    <article class="about-value-card">
+
+                        <div class="about-value-icon">
+
+                            <i class="bi bi-bullseye"></i>
+
+                        </div>
+
+                        <span class="about-value-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Misión
+                        </h3>
+
+                        <p>
+                            Brindar soluciones integrales a nuestros clientes,
+                            enfocándonos en la seguridad, calidad y productividad,
+                            contribuyendo al desarrollo sostenible de nuestra
+                            sociedad.
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <!-- VISIÓN -->
+
+                <div class="col-lg-4">
+
+                    <article class="about-value-card">
+
+                        <div class="about-value-icon">
+
+                            <i class="bi bi-eye"></i>
+
+                        </div>
+
+                        <span class="about-value-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Visión
+                        </h3>
+
+                        <p>
+                            Ser reconocidos como una empresa líder en el mercado
+                            por nuestros servicios especializados, generando
+                            confianza y relaciones duraderas con nuestros clientes.
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <!-- VALORES -->
+
+                <div class="col-lg-4">
+
+                    <article class="about-value-card">
+
+                        <div class="about-value-icon">
+
+                            <i class="bi bi-stars"></i>
+
+                        </div>
+
+                        <span class="about-value-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Valores
+                        </h3>
+
+                        <ul class="about-values-list">
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Vocación de servicio
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Ética profesional
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Compromiso con el cliente
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Transparencia
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Trabajo en equipo
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Responsabilidad social
+                            </li>
+
+                        </ul>
+
+                    </article>
+
+                </div>
+
             </div>
-          </div>
+
         </div>
-      </div>
-    </div>
-  </div>-->
 
-  <!-- llamar a otros/footer.php -->
-  <?php include 'otros/footer.php'; ?>
-  <script>
-    // Al cargar, animar texto; cuando termine, animar imagen
-    window.addEventListener("DOMContentLoaded", () => {
-      const text = document.querySelector(".hero-text");
-      const image = document.querySelector(".hero-image");
+    </section>
 
-      // Asegura que la imagen permanezca oculta y fuera mientras entra el texto
-      image.style.visibility = "hidden";
 
-      // Disparar animación del texto
-      text.classList.add("animate-text");
+    <!-- ======================================================
+         ESTADÍSTICAS
+    ======================================================= -->
 
-      // Cuando el texto termina, mostrar y animar la imagen
-      text.addEventListener(
-        "animationend",
-        () => {
-          image.style.visibility = "visible";
-          image.classList.add("animate-image");
-        }, {
-          once: true
-        }
-      );
-    });
-  </script>
-  <script>
-    $(function() {
+    <section class="about-stats-section">
 
-      /* ===============================
-         ABRIR CHAT
-      =============================== */
-      $("#chatButton").on("click", function() {
-        $("#chatButtonContainer").hide();
-        $("#chatFormContainer").removeClass("d-none");
-      });
+        <div class="container">
 
-      /* ===============================
-         CERRAR CHAT
-      =============================== */
-      $("#closeChatForm").on("click", function() {
-        $("#chatFormContainer").addClass("d-none");
-        $("#chatButtonContainer").show();
-      });
+            <div class="row g-0">
 
-      /* ===============================
-         ENVIAR WHATSAPP
-      =============================== */
-      $("#chatForm").on("submit", function(e) {
-        e.preventDefault();
+                <div class="col-md-4">
 
-        const nombre = $("#chat_nombre").val().trim();
-        const mensaje = $("#chat_mensaje").val().trim();
-        const asesorTelefono = $("#chat_asesor").val();
-        const asesorNombre = $("#chat_asesor option:selected").data("nombre");
+                    <div class="about-stat">
 
-        /* ===============================
-           VALIDACIONES
-        =============================== */
-        if (!asesorTelefono) {
-          alert("⚠️ Seleccione un asesor.");
-          return;
-        }
+                        <div class="about-stat-icon">
 
-        if (nombre.length < 3) {
-          alert("⚠️ Ingrese su nombre.");
-          return;
-        }
+                            <i class="bi bi-buildings"></i>
 
-        if (mensaje.length < 0) {
-          alert("⚠️ Escriba un mensaje.");
-          return;
-        }
+                        </div>
 
-        if (!/^[0-9]{9}$/.test(asesorTelefono)) {
-          alert("⚠️ Número de WhatsApp inválido.");
-          return;
-        }
+                        <div>
 
-        /* ===============================
-           MENSAJE FORMAL
-        =============================== */
-        const empresa = "Mi Inmobiliaria";
+                            <strong>
+                                <?= number_format($totalPropiedades); ?>
+                            </strong>
 
-        const texto = `
-${mensaje}
-        `.trim();
+                            <span>
+                                Propiedades
+                            </span>
 
-        /* ===============================
-           ABRIR WHATSAPP
-        =============================== */
-        const url = `https://api.whatsapp.com/send?phone=51${asesorTelefono}&text=${encodeURIComponent(texto)}`;
-        window.open(url, "_blank");
-      });
+                        </div>
 
-    });
-  </script>
-  <!--llamar a js/script.js-->
-  <script src="js/script.js"></script>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="about-stat">
+
+                        <div class="about-stat-icon">
+
+                            <i class="bi bi-person-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                <?= count($asesores); ?>
+                            </strong>
+
+                            <span>
+                                Asesores
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="about-stat">
+
+                        <div class="about-stat-icon">
+
+                            <i class="bi bi-headset"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                100%
+                            </strong>
+
+                            <span>
+                                Atención personalizada
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         CTA
+    ======================================================= -->
+
+    <section class="cta-section">
+
+        <div class="container">
+
+            <div class="row align-items-center g-4">
+
+                <div class="col-lg-8">
+
+                    <span class="section-eyebrow light">
+                        Estamos para ayudarte
+                    </span>
+
+                    <h2>
+
+                        ¿Buscas tu próximo
+                        <strong>hogar o inversión?</strong>
+
+                    </h2>
+
+                    <p>
+                        Nuestro equipo está listo para ayudarte a encontrar
+                        la propiedad que necesitas.
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-4 text-lg-end">
+
+                    <a
+                        href="contacto.php"
+                        class="btn btn-success btn-lg px-5">
+
+                        <i class="bi bi-chat-dots me-2"></i>
+
+                        Contáctanos
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <?php include 'otros/informacion.php'; ?>
+    <!-- ======================================================
+         FOOTER
+    ======================================================= -->
+
+    <?php include 'otros/footer.php'; ?>
+
+
+    <!-- ======================================================
+         BOOTSTRAP JS
+    ======================================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script>
+        /*======================================================
+         ANIMACIONES
+    ======================================================= */
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const elements = document.querySelectorAll(
+                ".about-hero-section, .about-value-card, .about-stat, .schedule-card"
+            );
+
+            if (!("IntersectionObserver" in window)) {
+                elements.forEach(function(element) {
+                    element.classList.add("is-visible");
+                });
+
+                return;
+            }
+
+            const observer = new IntersectionObserver(
+                function(entries, observer) {
+
+                    entries.forEach(function(entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("is-visible");
+
+                            observer.unobserve(entry.target);
+                        }
+
+                    });
+
+                }, {
+                    threshold: 0.12
+                }
+            );
+
+            elements.forEach(function(element) {
+                observer.observe(element);
+            });
+
+        });
+    </script>
+    <!-- ======================================================
+         JQUERY
+    ======================================================= -->
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+    <!-- ======================================================
+         JS DEL CHAT
+    ======================================================= -->
+
+    <script src="js/chat.js"></script>
+
 </body>
 
 </html>

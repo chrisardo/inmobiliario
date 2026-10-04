@@ -34,7 +34,7 @@ if (!empty($usuario['imagen'])) {
 
             <a class="navbar-brand fw-bold text-primary fs-3 text-dark" href="#">
                 <?php if ($fotoPerfil): ?>
-                    <img src="<?= $fotoPerfil ?>" class="rounded-circle border-success" width="44" height="44">
+                    <img src="<?= $fotoPerfil ?>" class="rounded-circle border-success" height="45">
                 <?php else: ?>
                     <i class="fas fa-user-circle fa-2x"></i>
                 <?php endif; ?>
