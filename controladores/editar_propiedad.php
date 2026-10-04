@@ -27,7 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'edita
             return;
         }
     }
-
+    if ($_POST['precio_anterior'] < 0) {
+        $mensaje = "El precio anterior no puede ser negativo.";
+        return;
+    }
     if ($_POST['precio'] <= 0) {
         $mensaje = "El precio debe ser mayor a 0.";
         return;
@@ -42,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'edita
 
     $nombre       = trim($_POST['nombre']);
     $codigo       = trim($_POST['codigo']);
+    $precio_anterior = floatval($_POST['precio_anterior'] ?? 0);
     $precio       = floatval($_POST['precio']);
     $tamano_area   = floatval($_POST['tamano_area']);
     $ubicacion = trim($_POST['ubicacion'] ?? '');
@@ -75,19 +79,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'edita
 
     if (!$hayImagen) {
 
-        $sql = "UPDATE propiedades SET
-                    nombre = ?, codigo = ?, id_categoria = ?, tamano_area_metros = ?, precio = ?, ubicacion = ?
+        $sql = "UPDATE propiedades SET 
+                    nombre = ?, codigo = ?, id_categoria = ?, tamano_area_metros = ?, precio = ?, precio_anterior = ? ,ubicacion = ?, fecha_actualizacion = CURDATE()
                 WHERE id_propiedad = ? AND id_user = ?";
 
         $stmt = $conexion->prepare($sql);
 
         $stmt->bind_param(
-            "ssiddsii",
+            "ssidddsii",
             $nombre,
             $codigo,
             $id_categoria,
             $tamano_area,
             $precio,
+            $precio_anterior,
             $ubicacion,
             $id_propiedad,
             $usId
@@ -95,20 +100,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'edita
     } else {
 
         $sql = "UPDATE propiedades SET
-                    nombre = ?, codigo = ?, imagen = ?, id_categoria = ?, tamano_area_metros = ?, precio = ?,  ubicacion = ?
+                    nombre = ?, codigo = ?, imagen = ?, id_categoria = ?, tamano_area_metros = ?, precio = ?, precio_anterior = ?, ubicacion = ?
                 WHERE id_propiedad = ? AND id_user = ?";
 
         $stmt = $conexion->prepare($sql);
         $imagen = null;
 
         $stmt->bind_param(
-            "ssbiddsii",
+            "ssbidddsii",
             $nombre,
             $codigo,
             $imagen,
             $id_categoria,
             $tamano_area,
             $precio,
+            $precio_anterior,
             $ubicacion,
             $id_propiedad,
             $usId
